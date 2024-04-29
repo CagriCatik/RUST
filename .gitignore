@@ -1,0 +1,12 @@
+# Ignore compiled files
+/target/
+
+# Ignore Cargo.lock file
+Cargo.lock
+
+# Ignore vscode configuration
+.vscode/
+
+# Ignore build artifacts
+*.rlib
+*.rmeta
