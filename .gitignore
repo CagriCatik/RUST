@@ -10,3 +10,9 @@ Cargo.lock
 # Ignore build artifacts
 *.rlib
 *.rmeta
+
+
+# exe file
+*.exe
+*.pdb
+
