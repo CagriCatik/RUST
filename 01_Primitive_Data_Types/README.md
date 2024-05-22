@@ -1,81 +1,112 @@
 # Primitive Data Types
 
-In this tutorial, we'll delve into the fundamental building blocks of Rust programming language: the primitive data types. Rust, being a statically typed language, requires you to specify the data type of variables during declaration. Primitive data types, also known as scalar data types, include integers, floating-point numbers, Booleans, and characters.
+## Introduction
 
-## 1. Integers
+In Rust, understanding primitive data types is fundamental to mastering the language. Rust is a statically typed programming language, which means you must declare the data type of each variable explicitly. The primitive data types in Rust, also known as scalar types, include integers, floating-point numbers, Booleans, and characters. This tutorial will delve into each of these types, exploring their properties, ranges, and usage.
 
-Rust provides both signed and unsigned integer types of various sizes. Signed integers can hold positive or negative values, while unsigned integers can only hold positive values.
+## Integers
 
-### Code Example:
+### Signed and Unsigned Integers
+
+Rust provides both signed and unsigned integers of various sizes. The primary difference between these two types is that signed integers can hold both positive and negative values, whereas unsigned integers can only hold non-negative values. Here are the integer types available in Rust:
+
+- **Signed Integers**: `i8`, `i16`, `i32`, `i64`, `i128`
+- **Unsigned Integers**: `u8`, `u16`, `u32`, `u64`, `u128`
+
+### Example: Signed and Unsigned Integers
 
 ```rust
 fn main() {
-    let x: i32 = 42; // Signed integer
-    let y: u64 = 100; // Unsigned integer
-
+    let x: i32 = 42;  // Signed 32-bit integer
+    let y: u64 = 100; // Unsigned 64-bit integer
+    
     println!("Signed integer: {}", x);
     println!("Unsigned integer: {}", y);
 }
 ```
 
-### Explanation:
+In this example, `x` is a signed 32-bit integer, meaning it can hold values from -2^31 to 2^31 - 1. On the other hand, `y` is an unsigned 64-bit integer, capable of holding values from 0 to 2^64 - 1.
 
-- Signed integers: `i8`, `i16`, `i32`, `i64`, `i128`
-- Unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`
+### Range and Size
 
-The size and range of values vary with the type (`i32` can hold 32 bits, while `u64` can hold 64 bits). The range for `i32` is from `-2^31` to `2^31 - 1`, and for `i64` it's from `-2^63` to `2^63 - 1`.
+The size of the integer determines the range of values it can hold:
 
-## 2. Floating-Point Numbers
+- `i8`: -128 to 127
+- `u8`: 0 to 255
+- `i16`: -32,768 to 32,767
+- `u16`: 0 to 65,535
+- `i32`: -2,147,483,648 to 2,147,483,647
+- `u32`: 0 to 4,294,967,295
+- `i64`: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+- `u64`: 0 to 18,446,744,073,709,551,615
+- `i128`: -170,141,183,460,469,231,731,687,303,715,884,105,728 to 170,141,183,460,469,231,731,687,303,715,884,105,727
+- `u128`: 0 to 340,282,366,920,938,463,463,374,607,431,768,211,455
 
-Floating-point numbers represent numbers with fractional parts. Rust offers two floating-point types: `f32` and `f64`.
-
-### Code Example:
+### Example: Maximum Values
 
 ```rust
 fn main() {
-    let pi: f64 = 3.14;
+    let max_i32: i32 = i32::MAX;
+    let max_i64: i64 = i64::MAX;
+    
+    println!("Maximum value of i32: {}", max_i32);
+    println!("Maximum value of i64: {}", max_i64);
+}
+```
 
+In this example, `i32::MAX` and `i64::MAX` are used to obtain the maximum values for `i32` and `i64` types, respectively.
+
+## Floating-Point Numbers
+
+Rust supports two types of floating-point numbers, which are used to represent numbers with fractional parts:
+
+- `f32`: 32-bit floating-point number
+- `f64`: 64-bit floating-point number
+
+### Example: Floating-Point Numbers
+
+```rust
+fn main() {
+    let pi: f64 = 3.14; // 64-bit floating-point number
+    
     println!("Value of Pi: {}", pi);
 }
 ```
 
-### Explanation:
+In this example, `pi` is a 64-bit floating-point number with a value of 3.14.
 
-- `f32`: 32-bit floating point
-- `f64`: 64-bit floating point
+## Booleans
 
-## 3. Booleans
+Booleans are used to represent true or false values. In Rust, the boolean type is `bool`.
 
-Boolean values can be either `true` or `false`.
-
-### Code Example:
+### Example: Booleans
 
 ```rust
 fn main() {
     let is_snowing: bool = true;
-
+    
     println!("Is it snowing? {}", is_snowing);
 }
 ```
 
-### Explanation:
+In this example, `is_snowing` is a boolean variable set to `true`.
 
-- `bool`: Boolean type, values can be `true` or `false`.
+## Characters
 
-## 4. Characters
+The `char` type represents a single Unicode scalar value. This means it can represent a wide variety of characters from different languages and symbols.
 
-Characters represent single Unicode scalar values.
-
-### Code Example:
+### Example: Characters
 
 ```rust
 fn main() {
-    let letter: char = 'a';
-
-    println!("First letter of the alphabet is: {}", letter);
+    let letter: char = 'A';
+    
+    println!("First letter of the alphabet: {}", letter);
 }
 ```
 
-### Explanation:
+In this example, `letter` is a character variable holding the value 'A'.
 
-- `char`: Character type, representing a single Unicode scalar value.
+## Conclusion
+
+This tutorial covered the basic primitive data types in Rust, including integers, floating-point numbers, Booleans, and characters. Understanding these types is crucial for effectively working with Rust, as they form the foundation of data representation in the language. In subsequent lessons, we will explore more advanced topics and data structures in Rust.

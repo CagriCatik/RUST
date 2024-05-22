@@ -1,176 +1,153 @@
 # Functions
 
-In this tutorial, we'll delve into functions in Rust. Up until now, we've primarily worked with the `main` function, which serves as the entry point for Rust programs. Let's explore how to define and use functions beyond the `main` function.
+## Introduction to Functions in Rust
 
-## 1. Understanding Functions in Rust
+In this lesson, we will delve into the concept of functions in Rust. Until now, you have encountered only one function, the `main` function. This tutorial will provide a detailed understanding of defining and using functions in Rust, adhering to scientific rigor and addressing potential inaccuracies.
 
-In Rust, any function starts with the keyword `fn`, followed by the function's name. It's essential to note that the `main` function serves as the entry point for your program, and changing its name will lead to compilation errors.
+### The Main Function
+
+The `main` function is the entry point of every Rust program. When you navigate to your project's folder and execute `cargo run`, the `main` function is invoked. For instance, the following simple program will print "Hello, world!" after compilation:
 
 ```rust
 fn main() {
-    // Your code here
-}
-```
-
-## 2. Naming Conventions
-
-- Functions and variables in Rust should follow the snake case convention, where words are separated by underscores (`_`).
-- Avoid using kebab case for functions and variables.
-
-Example:
-
-```rust
-fn hello_world() {
     println!("Hello, world!");
 }
 ```
 
-## 3. Defining Functions with Parameters
+If you rename the `main` function to something else, such as `hello`, Rust will produce errors because it cannot find the `main` function:
 
-Functions can accept parameters, which are specified within the parentheses. Let's create a function `tell_height` that prints a message about the height passed to it.
+- `function hello is never used`
+- `E0601: main function not found in crate`
+
+The `main` function must always be present as it serves as the entry point for the program.
+
+### Defining Functions
+
+In Rust, any function starts with the keyword `fn`, followed by the function name, parentheses, and curly braces encompassing the function body. For example:
 
 ```rust
-fn tell_height(height: i32) {
-    println!("My height is {} cm", height);
+fn my_function() {
+    // function body
 }
 ```
 
-## 4. Function Invocation
+#### Naming Conventions
 
-Invoke a function by writing its name followed by parentheses. If the function requires arguments, provide them within the parentheses.
+Rust uses snake_case for function and variable names. This means all letters should be lowercase and words are separated by underscores. For example:
+
+```rust
+fn hello_world() {
+    println!("Hello, Rust!");
+}
+```
+
+Avoid using kebab-case (e.g., `hello-world`) as it is not permitted in Rust function names.
+
+### Function Parameters and Return Values
+
+Functions can accept parameters and return values. Parameters are specified within the parentheses following the function name, and the return type is specified after an arrow (`->`).
+
+#### Example: Simple Function
+
+Here is a simple function that prints a message:
+
+```rust
+fn hello_world() {
+    println!("Hello, Rust!");
+}
+```
+
+To use this function, call it from the `main` function:
 
 ```rust
 fn main() {
-    tell_height(182);
+    hello_world();
 }
 ```
 
-## 5. Functions with Multiple Parameters
+#### Example: Function with Parameters
 
-You can define functions with multiple parameters separated by commas within the parentheses.
+Functions can accept parameters of various types. Here’s an example function that takes an integer parameter and prints it:
 
 ```rust
-fn human_id(name: &str, age: u32, height: f32) {
-    println!("My name is {}, I am {} years old, and my height is {} cm", name, age, height);
+fn print_height(height: i32) {
+    println!("My height is {} cm.", height);
+}
+
+fn main() {
+    print_height(182);
 }
 ```
 
-## 6. Returning Values from Functions
+### Function Hoisting
 
-Functions in Rust can return values using the `->` syntax followed by the return type.
+In Rust, you can define functions either before or after the `main` function. This is known as function hoisting. For example:
+
+```rust
+fn main() {
+    greet();
+}
+
+fn greet() {
+    println!("Hello, Rust!");
+}
+```
+
+### Expressions and Statements
+
+Understanding expressions and statements is crucial in Rust. 
+
+- **Expression:** Anything that returns a value.
+- **Statement:** Anything that does not return a value.
+
+For example, the following are expressions:
+
+```rust
+5
+true
+3 + 4
+```
+
+An `if` condition is also an expression in Rust:
+
+```rust
+let result = if condition { value1 } else { value2 };
+```
+
+### Returning Values from Functions
+
+Functions in Rust can return values using expressions. The return type is specified after the arrow (`->`):
 
 ```rust
 fn add(a: i32, b: i32) -> i32 {
     a + b
 }
-```
 
-## 7. Function Expression vs. Statement
-
-- **Expression**: Anything that returns a value.
-- **Statement**: Anything that does not return a value and usually ends with a semicolon (`;`).
-
-Example of an expression:
-
-```rust
-let result = add(4, 6);
-```
-
-Example of a statement:
-
-```rust
-let x = 5;
-```
-
-## 8. Example: BMI Calculation Function
-
-Let's create a function to calculate the Body Mass Index (BMI) using the formula: BMI = weight (kg) / (height (m) * height (m)).
-
-```rust
-fn calculate_bmi(weight_kg: f64, height_m: f64) -> f64 {
-    weight_kg / (height_m * height_m)
-}
-```
-
-## 9. Using the BMI Function
-
-```rust
 fn main() {
-    let weight = 75.0; // in kg
-    let height = 1.75; // in meters
-
-    let bmi = calculate_bmi
+    let sum = add(4, 6);
+    println!("Sum: {}", sum);
+}
 ```
 
-## 10. Organizing Functions in Rust
+### Example: Calculating BMI
 
-It's common practice to organize your Rust code by defining functions before their usage, although Rust allows for flexibility in function declaration order due to hoisting.
+Let's create a function that calculates the Body Mass Index (BMI). The formula for BMI is weight in kilograms divided by the square of height in meters.
 
 ```rust
+fn calculate_bmi(weight: f64, height: f64) -> f64 {
+    weight / (height * height)
+}
+
 fn main() {
-    say_hello();
-}
-
-fn say_hello() {
-    println!("Hello, Rust!");
-}
-```
-
-## 11. Function Overloading and Default Parameters
-
-Rust doesn't support function overloading in the traditional sense, but you can achieve similar behavior using traits and generics. Additionally, Rust doesn't provide default parameter values.
-
-## 12. Unit Tests for Functions
-
-Rust provides built-in support for unit testing through the `#[test]` attribute. You can write test functions within your code, and Rust's testing framework will execute them when running `cargo test`.
-
-```rust
-#[test]
-fn test_bmi_calculation() {
-    assert_eq!(calculate_bmi(75.0, 1.75), 24.49);
+    let weight = 70.0;
+    let height = 1.75;
+    let bmi = calculate_bmi(weight, height);
+    println!("Your BMI is {:.2}", bmi);
 }
 ```
 
-## 13. Documentation for Functions
+### Conclusion
 
-Documentation is crucial for maintaining and sharing Rust code. You can add documentation comments (doc comments) above functions using `///`.
+This tutorial has provided a comprehensive overview of functions in Rust. Functions are fundamental building blocks in Rust, allowing you to organize and reuse code effectively. Understanding the correct syntax, naming conventions, and the difference between expressions and statements is essential for writing efficient Rust programs.
 
-```rust
-/// Calculates the Body Mass Index (BMI) using the formula: weight (kg) / (height (m) * height (m)).
-///
-/// # Arguments
-///
-/// * `weight_kg` - The weight in kilograms.
-/// * `height_m` - The height in meters.
-///
-/// # Returns
-///
-/// The calculated BMI as a floating-point number.
-fn calculate_bmi(weight_kg: f64, height_m: f64) -> f64 {
-    weight_kg / (height_m * height_m)
-}
-```
-
-## 14. Error Handling in Functions
-
-Rust emphasizes safety and correctness, so error handling is an essential aspect of writing robust code. Functions can return `Result` or `Option` types to handle potential errors or absence of values gracefully.
-
-```rust
-fn parse_int(s: &str) -> Result<i32, std::num::ParseIntError> {
-    s.parse::<i32>()
-}
-```
-
-## 15. Lifetimes in Functions
-
-When working with references in Rust, understanding lifetimes is crucial. Functions with references as parameters may require explicit lifetime annotations to ensure memory safety.
-
-```rust
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
-```
+By mastering these concepts, you will be better equipped to handle more complex programming challenges in Rust. Continue practicing and exploring the language to deepen your understanding.
