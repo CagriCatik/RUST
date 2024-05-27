@@ -21,12 +21,45 @@ Rust is a modern, statically-typed systems programming language that emphasizes 
 13. [ ] [Enums](./13_Enums/README.md)
 14. [ ] [Error Handling Techniques](./14_Error-Handling/README.md)
 15. [ ] [Collection Types](./15_Collection-Types/README.md)
+16. [ ] [Projects](./16_Projects/README.md)
 
 
 ## Getting Started
 
 To get started with Rust, you'll need to [install the Rust toolchain](https://www.rust-lang.org/tools/install) on your system. Once installed, you can compile and run Rust programs using the `rustc` compiler and the `cargo` build tool.
 
+## Run the Rust Code
+
+
+1. **Create a New Rust Project:**
+   - Navigate to the directory where you want to create your project.
+   - Use the `cargo` command to create a new project. For example, to create a project named `hello_world`, run:
+     ```sh
+     cargo new <project_name>
+     ```
+   - This command creates a new directory named `<project_name>` with a basic project structure.
+
+
+2. **Build the Project:**
+   - In the project directory, run the following command to build your project:
+     ```sh
+     cargo build
+     ```
+   - This compiles your project and generates an executable in the `target/debug` directory.
+
+3. **Run the Project:**
+   - To run the project, use the following command:
+     ```sh
+     cargo run
+     ```
+   - This will compile and run your project in one step, displaying the output.
+
+
 ## Learning Resources
 
 This guide is based on the excellent [Bek Brace YouTube channel](https://www.youtube.com/playlist?list=PLrOQsSoS-V69UWKxV4FNRJFlHS0DUFQA2), which provides comprehensive video tutorials on Rust fundamentals. Additionally, you can refer to the official [Rust Book](https://doc.rust-lang.org/book/) and the [Rust by Example](https://doc.rust-lang.org/rust-by-example/) for in-depth documentation and examples.
+
+
+### Conclusion
+
+By following these steps, you should be able to set up, write, build, and run Rust code on your local machine. Rust's tooling, especially with `cargo`, makes managing projects and dependencies straightforward and efficient.

@@ -1,76 +1,49 @@
-// Rust code for Compound Data Types
-
-// Define a struct to represent a book
-struct Book {
-    title: String,
-    author: String,
-    genre: String,
-    available: bool,
-}
-
-impl Book {
-    // Constructor method to create a new book instance
-    fn new(title: &str, author: &str, genre: &str, available: bool) -> Self {
-        Book {
-            title: title.to_string(),
-            author: author.to_string(),
-            genre: genre.to_string(),
-            available,
-        }
-    }
-
-    // Method to borrow a book
-    fn borrow(&mut self) -> () {
-        if self.available {
-            println!("You have borrowed '{}' by {}", self.title, self.author);
-            self.available = false;
-        } else {
-            println!("Sorry, '{}' is currently unavailable.", self.title);
-        }
-    }
-
-    // Method to return a book
-    fn return_book(&mut self) {
-        println!("You have returned '{}'. Thank you!", self.title);
-        self.available = true;
-    }
-}
-
 fn main() {
-    // Create an array of books
-    let mut library: Vec<Book> = vec![
-        Book::new("1984", "George Orwell", "Dystopian", true),
-        Book::new("To Kill a Mockingbird", "Harper Lee", "Fiction", true),
-        Book::new("The Great Gatsby", "F. Scott Fitzgerald", "Classic", false),
-    ];
+    // Arrays
+    let numbers: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("Number array: {:?}", numbers);
 
-    // Display available books in the library
-    println!("Available Books:");
-    for book in &library {
-        if book.available {
-            println!("Title: {}, Author: {}, Genre: {}", book.title, book.author, book.genre);
-        }
-    }
+    // Accessing array elements
+    println!("First number: {}", numbers[0]);
+    println!("Second number: {}", numbers[1]);
+    println!("Third number: {}", numbers[2]);
 
-    // Borrow a book
-    library[0].borrow();
+    // Attempt to mix data types in an array (This will cause a compilation error if uncommented)
+    // let mix = [1, "Apple", true];
+    // println!("Mix array: {:?}", mix);
 
-    // Display available books after borrowing
-    println!("\nAvailable Books after borrowing:");
-    for book in &library {
-        if book.available {
-            println!("Title: {}, Author: {}, Genre: {}", book.title, book.author, book.genre);
-        }
-    }
+    // Tuples
+    let person: (&str, i32, bool) = ("Alice", 30, false);
+    println!("Person tuple: {:?}", person);
 
-    // Return the borrowed book
-    library[0].return_book();
+    // Accessing tuple elements using pattern matching
+    let (name, age, is_student) = person;
+    println!("Name: {}", name);
+    println!("Age: {}", age);
+    println!("Is student: {}", is_student);
 
-    // Display available books after returning
-    println!("\nAvailable Books after returning:");
-    for book in &library {
-        if book.available {
-            println!("Title: {}, Author: {}, Genre: {}", book.title, book.author, book.genre);
-        }
-    }
+    // Accessing tuple elements using indexing
+    println!("Name: {}", person.0);
+    println!("Age: {}", person.1);
+    println!("Is student: {}", person.2);
+
+    // Slices
+    let numbers: [i32; 5] = [1, 2, 3, 4, 5];
+    let number_slice: &[i32] = &numbers[1..4];
+    println!("Number slice: {:?}", number_slice);
+
+    // String and String Slices
+    let mut greeting = String::from("Hello");
+    greeting.push_str(", world!");
+    println!("{}", greeting);
+
+    let greeting = String::from("Hello, world!");
+    let hello = &greeting[0..5];
+    println!("Slice: {}", hello);
+
+    // Demonstrating difference between String and &str
+    let string = String::from("Hello, world!");
+    let string_slice: &str = &string;
+    println!("String: {}", string);
+    println!("String slice: {}", string_slice);
 }
