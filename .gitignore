@@ -18,3 +18,50 @@ Cargo.lock
 
 # pdf file
 *.pdf
+
+
+# Rust
+target/
+**/*.rs.bk
+
+# Dependencies
+/Cargo.lock
+
+# Ignoring generated files by Rust toolchain
+**/*.rs.bk
+
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.dylib
+*.so
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# Other files and directories
+*.log
+*.tmp
+*.bak
+*.old
+*.orig
+*.rej
+
+# By the following pattern you can ignore the 'target' directory except 'target/.gitkeep'
+# You can place an empty '.gitkeep' file inside the 'target' directory to keep the directory structure
+!/target/.gitkeep

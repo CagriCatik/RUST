@@ -15,9 +15,13 @@ Rust is a modern, statically-typed systems programming language that emphasizes 
 7. [ ] [Constants](./07_Constants/README.md)
 8. [ ] [Shadowing](./08_Shadowing/README.md)
 9. [ ] [Comments](./09_Comments/README.md)
-1. [ ] [If-Else Statements - Control Flow](./10_If_Else_Statements_Control_Flow/README.md)
-1. [ ] [Loops Control - Flow](./11_Loops-Control-Flow/README.md)
-1. [ ] [Structs](./12_Structs/README.md)
+10. [ ] [If-Else Statements - Control Flow](./10_If_Else_Statements_Control_Flow/README.md)
+11. [ ] [Loops Control - Flow](./11_Loops-Control-Flow/README.md)
+12. [ ] [Structs](./12_Structs/README.md)
+13. [ ] [Enums](./13_Enums/README.md)
+14. [ ] [Error Handling Techniques](./14_Error-Handling/README.md)
+15. [ ] [Collection Types](./15_Collection-Types/README.md)
+
 
 ## Getting Started
 
