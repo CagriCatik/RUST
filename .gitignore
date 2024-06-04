@@ -62,6 +62,9 @@ Desktop.ini
 *.orig
 *.rej
 
+# mdBook
+book
+
 # By the following pattern you can ignore the 'target' directory except 'target/.gitkeep'
 # You can place an empty '.gitkeep' file inside the 'target' directory to keep the directory structure
 !/target/.gitkeep

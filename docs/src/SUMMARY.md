@@ -1,0 +1,17 @@
+# RUST Fundamentals
+
+- [Primitive Data Types](./01_Primitive_Data_Types/README.md)
+- [Compound Data Types](./02_Compound_Data_Types/README.md)
+- [Functions](./03_Functions/README.md)
+- [Ownership](./04_Ownership/README.md)
+- [Borrowing and References](./05_Borrowing_and_References/README.md)
+- [Variables and Mutability](./06_Variables_&_Mutability/README.md)
+- [Constants](./07_Constants/README.md)
+- [Shadowing](./08_Shadowing/README.md)
+- [Comments](./09_Comments/README.md)
+- [If-else Statements](./10_If_Else_Statements_Control_Flow/README.md)
+- [Loops](./11_Loops-Control-Flow/README.md)
+- [Structs](./12_Structs/README.md)
+- [Enums](./13_Enums/README.md)
+- [Error Handling](./14_Error-Handling/README.md)
+- [Collection Types](./15_Collection-Types/README.md)
