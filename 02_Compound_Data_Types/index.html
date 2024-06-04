@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Compound Data Types</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01_Primitive_Data_Types/index.html"><strong aria-hidden="true">1.</strong> Primitive Data Types</a></li><li class="chapter-item expanded "><a href="../02_Compound_Data_Types/index.html" class="active"><strong aria-hidden="true">2.</strong> Compound Data Types</a></li><li class="chapter-item expanded "><a href="../03_Functions/index.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../04_Ownership/index.html"><strong aria-hidden="true">4.</strong> Ownership</a></li><li class="chapter-item expanded "><a href="../05_Borrowing_and_References/index.html"><strong aria-hidden="true">5.</strong> Borrowing and References</a></li><li class="chapter-item expanded "><a href="../06_Variables_&_Mutability/index.html"><strong aria-hidden="true">6.</strong> Variables and Mutability</a></li><li class="chapter-item expanded "><a href="../07_Constants/index.html"><strong aria-hidden="true">7.</strong> Constants</a></li><li class="chapter-item expanded "><a href="../08_Shadowing/index.html"><strong aria-hidden="true">8.</strong> Shadowing</a></li><li class="chapter-item expanded "><a href="../09_Comments/index.html"><strong aria-hidden="true">9.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../10_If_Else_Statements_Control_Flow/index.html"><strong aria-hidden="true">10.</strong> If-else Statements</a></li><li class="chapter-item expanded "><a href="../11_Loops-Control-Flow/index.html"><strong aria-hidden="true">11.</strong> Loops</a></li><li class="chapter-item expanded "><a href="../12_Structs/index.html"><strong aria-hidden="true">12.</strong> Structs</a></li><li class="chapter-item expanded "><a href="../13_Enums/index.html"><strong aria-hidden="true">13.</strong> Enums</a></li><li class="chapter-item expanded "><a href="../14_Error-Handling/index.html"><strong aria-hidden="true">14.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../15_Collection-Types/index.html"><strong aria-hidden="true">15.</strong> Collection Types</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="compound-data-types"><a class="header" href="#compound-data-types">Compound Data Types</a></h1>
+<p>In this lesson, we will explore the compound data types in Rust: arrays, tuples, slices, and strings. Each of these types allows for the storage and manipulation of multiple values in a structured way. We will examine the characteristics, usage, and differences between these types, ensuring a comprehensive understanding of each.</p>
+<h2 id="arrays"><a class="header" href="#arrays">Arrays</a></h2>
+<p>Arrays in Rust are a fixed-size collection of elements of the same type. This means that once an array is declared, its size cannot be changed, and all elements within the array must be of the same type.</p>
+<h3 id="declaration-and-initialization"><a class="header" href="#declaration-and-initialization">Declaration and Initialization</a></h3>
+<p>Here is an example of how to declare and initialize an array in Rust:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let numbers: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("Number array: {:?}", numbers);
+}</code></pre></pre>
+<p>In this code:</p>
+<ul>
+<li><code>let numbers: [i32; 5]</code> declares an array named <code>numbers</code> of type <code>i32</code> with a length of 5.</li>
+<li>The array is initialized with the values <code>[1, 2, 3, 4, 5]</code>.</li>
+<li><code>println!("Number array: {:?}", numbers);</code> prints the array using the debug format specifier <code>:?</code>.</li>
+</ul>
+<h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
+<p>If you attempt to mix data types in an array, Rust will generate a compilation error:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mix = [1, "Apple", true]; // This line will cause a compilation error
+    println!("Mix array: {:?}", mix);
+}</code></pre></pre>
+<p>The above code will result in the following error:</p>
+<pre><code>error[E0308]: mismatched types
+expected integer, found `&amp;str`
+</code></pre>
+<p>This error occurs because Rust arrays must be homogeneous, containing elements of the same type.</p>
+<h3 id="accessing-array-elements"><a class="header" href="#accessing-array-elements">Accessing Array Elements</a></h3>
+<p>You can access elements of an array using indices:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let fruits: [&amp;str; 3] = ["Apple", "Banana", "Orange"];
+    println!("First fruit: {}", fruits[0]);
+    println!("Second fruit: {}", fruits[1]);
+    println!("Third fruit: {}", fruits[2]);
+    println!("Fruit array: {:?}", fruits);
+}</code></pre></pre>
+<h2 id="tuples"><a class="header" href="#tuples">Tuples</a></h2>
+<p>Tuples in Rust are used to group multiple values of different types into a single compound type. Tuples have a fixed size and can contain heterogeneous types.</p>
+<h3 id="declaration-and-initialization-1"><a class="header" href="#declaration-and-initialization-1">Declaration and Initialization</a></h3>
+<p>Here is an example of declaring and initializing a tuple:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let person: (&amp;str, i32, bool) = ("Alice", 30, false);
+    println!("Person tuple: {:?}", person);
+}</code></pre></pre>
+<p>In this code:</p>
+<ul>
+<li><code>let person: (&amp;str, i32, bool)</code> declares a tuple named <code>person</code> containing a <code>&amp;str</code>, an <code>i32</code>, and a <code>bool</code>.</li>
+<li>The tuple is initialized with the values <code>("Alice", 30, false)</code>.</li>
+<li><code>println!("Person tuple: {:?}", person);</code> prints the tuple using the debug format specifier <code>:?</code>.</li>
+</ul>
+<h3 id="accessing-tuple-elements"><a class="header" href="#accessing-tuple-elements">Accessing Tuple Elements</a></h3>
+<p>You can access elements of a tuple using pattern matching or indexing:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let person = ("Alice", 30, false);
+    let (name, age, is_student) = person;
+    println!("Name: {}", name);
+    println!("Age: {}", age);
+    println!("Is student: {}", is_student);
+    println!("Person tuple: {:?}", person);
+}</code></pre></pre>
+<p>You can also access elements by index:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let person = ("Alice", 30, false);
+    println!("Name: {}", person.0);
+    println!("Age: {}", person.1);
+    println!("Is student: {}", person.2);
+}</code></pre></pre>
+<h2 id="slices"><a class="header" href="#slices">Slices</a></h2>
+<p>Slices in Rust are dynamically sized views into a contiguous sequence of elements. They do not own the data they reference and can be used to borrow a section of an array.</p>
+<h3 id="declaration-and-initialization-2"><a class="header" href="#declaration-and-initialization-2">Declaration and Initialization</a></h3>
+<p>Here is an example of declaring and using a slice:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let numbers: [i32; 5] = [1, 2, 3, 4, 5];
+    let number_slice: &amp;[i32] = &amp;numbers[1..4];
+    println!("Number slice: {:?}", number_slice);
+}</code></pre></pre>
+<p>In this code:</p>
+<ul>
+<li><code>let number_slice: &amp;[i32] = &amp;numbers[1..4];</code> creates a slice that references elements from index 1 to 3 of the <code>numbers</code> array.</li>
+<li><code>println!("Number slice: {:?}", number_slice);</code> prints the slice.</li>
+</ul>
+<h2 id="strings-and-string-slices"><a class="header" href="#strings-and-string-slices">Strings and String Slices</a></h2>
+<p>Strings in Rust are growable, mutable, and stored on the heap. They are owned types, meaning they manage their memory.</p>
+<h3 id="string-declaration-and-initialization"><a class="header" href="#string-declaration-and-initialization">String Declaration and Initialization</a></h3>
+<p>Here is an example of declaring and using a <code>String</code>:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut greeting = String::from("Hello");
+    greeting.push_str(", world!");
+    println!("{}", greeting);
+}</code></pre></pre>
+<p>In this code:</p>
+<ul>
+<li><code>let mut greeting = String::from("Hello");</code> creates a mutable <code>String</code> initialized with <code>"Hello"</code>.</li>
+<li><code>greeting.push_str(", world!");</code> appends <code>", world!"</code> to the <code>greeting</code> string.</li>
+<li><code>println!("{}", greeting);</code> prints the resulting string.</li>
+</ul>
+<h3 id="string-slices"><a class="header" href="#string-slices">String Slices</a></h3>
+<p>String slices are references to a portion of a string. They are immutable and usually used for borrowing.</p>
+<p>Here is an example:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let greeting = String::from("Hello, world!");
+    let hello = &amp;greeting[0..5];
+    println!("Slice: {}", hello);
+}</code></pre></pre>
+<p>In this code:</p>
+<ul>
+<li><code>let hello = &amp;greeting[0..5];</code> creates a string slice referencing the first five characters of <code>greeting</code>.</li>
+<li><code>println!("Slice: {}", hello);</code> prints the slice.</li>
+</ul>
+<h3 id="differences-between-string-and-str"><a class="header" href="#differences-between-string-and-str">Differences between <code>String</code> and <code>&amp;str</code></a></h3>
+<ul>
+<li><code>String</code> is a growable, mutable, owned type stored on the heap.</li>
+<li><code>&amp;str</code> is an immutable reference to a string slice, usually stored on the stack.</li>
+</ul>
+<p>Here is an example demonstrating these differences:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let string = String::from("Hello, world!");
+    let string_slice: &amp;str = &amp;string;
+    println!("String: {}", string);
+    println!("String slice: {}", string_slice);
+}</code></pre></pre>
+<p>In summary, understanding compound data types in Rust is crucial for efficient memory management and effective programming. Arrays, tuples, slices, and strings each have unique characteristics and uses, allowing for flexible and powerful data handling in Rust applications.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../01_Primitive_Data_Types/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../03_Functions/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../01_Primitive_Data_Types/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../03_Functions/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
