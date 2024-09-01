@@ -174,7 +174,121 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="comments"><a class="header" href="#comments">Comments</a></h1>
-<p>This folder contains Rust code files for Comments.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will explore the importance and usage of comments in Rust. Comments are an essential part of programming, providing clarity and context for your code. They are particularly valuable when working in teams, as they help other developers understand the intent and functionality of your code. Although comments are ignored by the compiler, they play a critical role in maintaining readable and maintainable code.</p>
+<h2 id="1-why-are-comments-important"><a class="header" href="#1-why-are-comments-important">1. Why Are Comments Important?</a></h2>
+<p>Comments serve several key purposes in programming:</p>
+<ul>
+<li><strong>Documentation</strong>: Comments help document the code, explaining what specific blocks of code do, especially complex or non-obvious sections.</li>
+<li><strong>Collaboration</strong>: In team environments, comments facilitate communication by explaining the purpose and functionality of code to other developers.</li>
+<li><strong>Maintenance</strong>: Comments make it easier to revisit and understand the code after some time has passed, aiding in debugging and future development.</li>
+</ul>
+<h2 id="2-types-of-comments-in-rust"><a class="header" href="#2-types-of-comments-in-rust">2. Types of Comments in Rust</a></h2>
+<p>Rust supports two main types of comments:</p>
+<ul>
+<li><strong>Line Comments</strong></li>
+<li><strong>Block Comments</strong></li>
+</ul>
+<h3 id="21-line-comments"><a class="header" href="#21-line-comments">2.1 Line Comments</a></h3>
+<p>Line comments are used to comment out a single line or part of a line of code. They begin with <code>//</code> and continue to the end of the line. These comments can be placed on their own line or at the end of a line of code.</p>
+<h4 id="example-line-comments"><a class="header" href="#example-line-comments">Example: Line Comments</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // This is a line comment explaining the next line of code
+    println!("Hello, world!"); // This prints "Hello, world!" to the console
+}</code></pre></pre>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation</a></h4>
+<ul>
+<li>The first comment explains the purpose of the <code>println!</code> statement.</li>
+<li>The second comment is placed at the end of the line to provide additional context directly next to the code it describes.</li>
+</ul>
+<h3 id="22-block-comments"><a class="header" href="#22-block-comments">2.2 Block Comments</a></h3>
+<p>Block comments are used to comment out multiple lines of code or to provide detailed explanations that span several lines. Block comments begin with <code>/*</code> and end with <code>*/</code>. They can span multiple lines, making them ideal for larger comments.</p>
+<h4 id="example-block-comments"><a class="header" href="#example-block-comments">Example: Block Comments</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    /*
+    This is a block comment that spans multiple lines.
+    It is useful for providing detailed explanations or temporarily disabling code.
+    */
+    println!("Hello, Rust!");
+}</code></pre></pre>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation</a></h4>
+<ul>
+<li>Block comments allow you to comment out multiple lines without needing to prefix each line with <code>//</code>.</li>
+<li>They are particularly useful for adding detailed explanations or for temporarily disabling a section of code during debugging.</li>
+</ul>
+<h3 id="23-nested-block-comments"><a class="header" href="#23-nested-block-comments">2.3 Nested Block Comments</a></h3>
+<p>Rust supports <strong>nested block comments</strong>, which means you can place one block comment inside another. This feature is particularly useful when you want to comment out a large block of code that already contains block comments.</p>
+<h4 id="example-nested-block-comments"><a class="header" href="#example-nested-block-comments">Example: Nested Block Comments</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    /*
+    This is the outer block comment.
+    /* 
+    This is a nested block comment inside the outer one.
+    */
+    This part is still within the outer block comment.
+    */
+    println!("Hello, world!");
+}</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation</a></h4>
+<ul>
+<li>The ability to nest block comments allows you to comment out sections of code that already include comments without causing syntax errors.</li>
+</ul>
+<h2 id="3-best-practices-for-using-comments"><a class="header" href="#3-best-practices-for-using-comments">3. Best Practices for Using Comments</a></h2>
+<p>While comments are valuable, it's important to use them effectively. Here are some best practices to consider:</p>
+<ul>
+<li><strong>Keep Comments Relevant</strong>: Ensure that comments accurately describe the code they reference. Outdated or incorrect comments can be misleading.</li>
+<li><strong>Avoid Redundant Comments</strong>: Do not state the obvious. Comments should add value, not reiterate what the code already clearly expresses.</li>
+<li><strong>Use Comments for Complex Logic</strong>: Focus on commenting complex or non-intuitive parts of the code. Simple operations generally do not need comments.</li>
+<li><strong>Maintain Updated Comments</strong>: When modifying code, always update the associated comments to reflect the changes.</li>
+</ul>
+<h2 id="4-commenting-techniques-in-practice"><a class="header" href="#4-commenting-techniques-in-practice">4. Commenting Techniques in Practice</a></h2>
+<h3 id="41-commenting-out-code-for-debugging"><a class="header" href="#41-commenting-out-code-for-debugging">4.1 Commenting Out Code for Debugging</a></h3>
+<p>During development, you might need to temporarily disable certain lines of code to test or debug other parts of your program. Comments are a quick and effective way to do this.</p>
+<h4 id="example-commenting-out-code"><a class="header" href="#example-commenting-out-code">Example: Commenting Out Code</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    println!("Start of the program");
+    
+    // println!("This line is commented out and will not be executed");
+    
+    println!("End of the program");
+}</code></pre></pre>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation</a></h4>
+<ul>
+<li>The commented-out line will not be executed when the program runs, allowing you to test the remaining code without removing the line entirely.</li>
+</ul>
+<h3 id="42-documenting-functions-and-modules"><a class="header" href="#42-documenting-functions-and-modules">4.2 Documenting Functions and Modules</a></h3>
+<p>In addition to inline comments, Rust encourages the use of documentation comments to describe functions, modules, and structs. Documentation comments are written using triple slashes (<code>///</code>) and can be processed by tools like <code>rustdoc</code> to generate HTML documentation.</p>
+<h4 id="example-documentation-comments"><a class="header" href="#example-documentation-comments">Example: Documentation Comments</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Adds two numbers together.
+/// 
+/// # Arguments
+/// 
+/// * `a` - The first number
+/// * `b` - The second number
+/// 
+/// # Returns
+/// 
+/// The sum of `a` and `b`.
+fn add(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="explanation-4"><a class="header" href="#explanation-4">Explanation</a></h4>
+<ul>
+<li>Documentation comments provide detailed information about the function, including its purpose, arguments, and return value.</li>
+<li>These comments can be compiled into documentation, making it easier for others to understand and use your code.</li>
+</ul>
+<h2 id="5-summary"><a class="header" href="#5-summary">5. Summary</a></h2>
+<p>In this lesson, we covered the importance of comments in Rust and how to use them effectively. Key points include:</p>
+<ul>
+<li><strong>Line Comments</strong>: Use <code>//</code> for single-line comments, either on their own line or at the end of a line of code.</li>
+<li><strong>Block Comments</strong>: Use <code>/* */</code> for multi-line comments, which can also be nested.</li>
+<li><strong>Best Practices</strong>: Keep comments relevant, avoid redundancy, and ensure comments are updated when code changes.</li>
+<li><strong>Documentation Comments</strong>: Use <code>///</code> for generating documentation that explains the functionality of your code.</li>
+</ul>
+<p>Comments are a vital part of writing maintainable and understandable code. While they do not affect the execution of your program, their presence can greatly enhance the readability and usability of your code, especially in collaborative environments. In the next lesson, we will delve into more advanced Rust features that build on the fundamentals we've covered so far.</p>
 
                     </main>
 

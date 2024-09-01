@@ -175,75 +175,115 @@
                     <main>
                         <h1 id="primitive-data-types"><a class="header" href="#primitive-data-types">Primitive Data Types</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
-<p>Rust is a statically typed programming language, which means the type of each variable must be known at compile time. This ensures type safety and can prevent a wide range of bugs. Rust's primitive data types, also known as scalar types, include integers, floating-point numbers, Booleans, and characters. This lesson covers each of these types in detail, providing examples to illustrate their usage.</p>
-<h2 id="integers"><a class="header" href="#integers">Integers</a></h2>
-<h3 id="signed-and-unsigned-integers"><a class="header" href="#signed-and-unsigned-integers">Signed and Unsigned Integers</a></h3>
-<p>In Rust, integers come in two main varieties: signed and unsigned. Signed integers can represent both positive and negative values, while unsigned integers can only represent positive values. Each variety comes in different sizes, which determine the range of values they can hold.</p>
-<h4 id="signed-integers"><a class="header" href="#signed-integers">Signed Integers</a></h4>
+<p>This tutorial will provide an in-depth explanation of primitive data types in the Rust programming language. Rust, a statically-typed language, requires the explicit declaration of data types for variables. Understanding these types is crucial for efficient memory management and ensuring code correctness. This lesson covers the fundamental primitive data types, including integers, floating-point numbers, Booleans, and characters.</p>
+<h2 id="1-primitive-data-types-in-rust"><a class="header" href="#1-primitive-data-types-in-rust">1. Primitive Data Types in Rust</a></h2>
+<p>Rust’s primitive data types, also known as scalar types, represent single values. These types are foundational to understanding how data is handled in Rust. The four primary scalar types in Rust are:</p>
+<ol>
+<li><strong>Integers</strong>: Signed (<code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>) and Unsigned (<code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>).</li>
+<li><strong>Floating-point numbers</strong>: <code>f32</code> and <code>f64</code>.</li>
+<li><strong>Boolean</strong>: <code>bool</code>.</li>
+<li><strong>Character</strong>: <code>char</code>.</li>
+</ol>
+<h3 id="11-integer-types"><a class="header" href="#11-integer-types">1.1 Integer Types</a></h3>
+<p>Rust offers both signed and unsigned integers, each with a range defined by their bit size.</p>
 <ul>
-<li><code>i8</code>: 8-bit signed integer</li>
-<li><code>i16</code>: 16-bit signed integer</li>
-<li><code>i32</code>: 32-bit signed integer</li>
-<li><code>i64</code>: 64-bit signed integer</li>
-<li><code>i128</code>: 128-bit signed integer</li>
-</ul>
-<h4 id="unsigned-integers"><a class="header" href="#unsigned-integers">Unsigned Integers</a></h4>
+<li>
+<p><strong>Signed Integers (<code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>)</strong>: These integers can store both positive and negative numbers. The range of values depends on the bit size. For example:</p>
 <ul>
-<li><code>u8</code>: 8-bit unsigned integer</li>
-<li><code>u16</code>: 16-bit unsigned integer</li>
-<li><code>u32</code>: 32-bit unsigned integer</li>
-<li><code>u64</code>: 64-bit unsigned integer</li>
-<li><code>u128</code>: 128-bit unsigned integer</li>
+<li><code>i8</code> ranges from -128 to 127.</li>
+<li><code>i32</code> ranges from -2^31 to 2^31 - 1.</li>
 </ul>
-<h3 id="example"><a class="header" href="#example">Example</a></h3>
+</li>
+<li>
+<p><strong>Unsigned Integers (<code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>)</strong>: These integers store only positive numbers and have a range starting from 0. For example:</p>
+<ul>
+<li><code>u8</code> ranges from 0 to 255.</li>
+<li><code>u32</code> ranges from 0 to 2^32 - 1.</li>
+</ul>
+</li>
+</ul>
+<h4 id="example-integer-types"><a class="header" href="#example-integer-types">Example: Integer Types</a></h4>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let x: i32 = 42; // Signed 32-bit integer
+    let x: i32 = -42; // Signed 32-bit integer
     let y: u64 = 100; // Unsigned 64-bit integer
     
     println!("Signed integer: {}", x);
     println!("Unsigned integer: {}", y);
 }</code></pre></pre>
-<h3 id="range-of-values"><a class="header" href="#range-of-values">Range of Values</a></h3>
-<p>The range of values an integer type can hold depends on its size. For example, an <code>i32</code> can hold values from <code>-2^31</code> to <code>2^31 - 1</code>, while a <code>u32</code> can hold values from <code>0</code> to <code>2^32 - 1</code>.</p>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation</a></h4>
+<ul>
+<li>In this example, <code>x</code> is an <code>i32</code>, allowing it to hold both positive and negative values.</li>
+<li><code>y</code> is a <code>u64</code>, meaning it can only hold positive values.</li>
+</ul>
+<h3 id="12-floating-point-types"><a class="header" href="#12-floating-point-types">1.2 Floating-Point Types</a></h3>
+<p>Floating-point numbers in Rust represent real numbers with fractional parts. Rust supports two types:</p>
+<ul>
+<li><strong><code>f32</code></strong>: A 32-bit floating-point number.</li>
+<li><strong><code>f64</code></strong>: A 64-bit floating-point number, which is the default type for floating-point literals in Rust.</li>
+</ul>
+<h4 id="example-floating-point-types"><a class="header" href="#example-floating-point-types">Example: Floating-Point Types</a></h4>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let max_i32: i32 = i32::MAX;
-    let max_i64: i64 = i64::MAX;
-    
-    println!("Maximum value of i32: {}", max_i32);
-    println!("Maximum value of i64: {}", max_i64);
-}</code></pre></pre>
-<h3 id="compiler-errors"><a class="header" href="#compiler-errors">Compiler Errors</a></h3>
-<p>If you try to assign a value that is out of range for a given type, the Rust compiler will produce an error.</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
-    let x: i32 = 2_147_483_648; // This will cause a compile-time error
-}</code></pre></pre>
-<p>The error message will indicate that the value does not fit within the specified type.</p>
-<h2 id="floating-point-numbers"><a class="header" href="#floating-point-numbers">Floating-Point Numbers</a></h2>
-<p>Rust provides two types of floating-point numbers: <code>f32</code> and <code>f64</code>. These types represent numbers with fractional parts.</p>
-<h3 id="example-1"><a class="header" href="#example-1">Example</a></h3>
-<pre><pre class="playground"><code class="language-rust">fn main() {
-    let pi: f64 = 3.14;
+    let pi: f64 = 3.14; // 64-bit floating-point number
     
     println!("Value of Pi: {}", pi);
 }</code></pre></pre>
-<h2 id="boolean-values"><a class="header" href="#boolean-values">Boolean Values</a></h2>
-<p>Boolean values in Rust are represented by the <code>bool</code> type. A <code>bool</code> can have one of two values: <code>true</code> or <code>false</code>.</p>
-<h3 id="example-2"><a class="header" href="#example-2">Example</a></h3>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation</a></h4>
+<ul>
+<li>Here, <code>pi</code> is defined as an <code>f64</code>, which provides more precision compared to <code>f32</code>.</li>
+</ul>
+<h3 id="13-boolean-type"><a class="header" href="#13-boolean-type">1.3 Boolean Type</a></h3>
+<p>The Boolean type in Rust is represented by the <code>bool</code> keyword. It can take only two values: <code>true</code> or <code>false</code>.</p>
+<h4 id="example-boolean-type"><a class="header" href="#example-boolean-type">Example: Boolean Type</a></h4>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let is_snowing: bool = true;
     
     println!("Is it snowing? {}", is_snowing);
 }</code></pre></pre>
-<h2 id="characters"><a class="header" href="#characters">Characters</a></h2>
-<p>The <code>char</code> type represents a single Unicode scalar value. This includes characters from many languages, as well as special characters.</p>
-<h3 id="example-3"><a class="header" href="#example-3">Example</a></h3>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation</a></h4>
+<ul>
+<li>The variable <code>is_snowing</code> is of type <code>bool</code> and holds the value <code>true</code>.</li>
+</ul>
+<h3 id="14-character-type"><a class="header" href="#14-character-type">1.4 Character Type</a></h3>
+<p>The <code>char</code> type in Rust represents a single Unicode scalar value. It can hold any character, including letters, numbers, and special symbols.</p>
+<h4 id="example-character-type"><a class="header" href="#example-character-type">Example: Character Type</a></h4>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let letter: char = 'A';
     
     println!("First letter of the alphabet: {}", letter);
 }</code></pre></pre>
-<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>This lesson covered the basic primitive data types in Rust, including integers, floating-point numbers, Booleans, and characters. Understanding these types is fundamental to writing safe and efficient Rust programs.</p>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation</a></h4>
+<ul>
+<li>The variable <code>letter</code> is of type <code>char</code> and holds the value <code>'A'</code>. Rust’s <code>char</code> type is 4 bytes in size and can represent a wide range of characters beyond just ASCII.</li>
+</ul>
+<h2 id="2-common-errors-and-considerations"><a class="header" href="#2-common-errors-and-considerations">2. Common Errors and Considerations</a></h2>
+<p>Understanding the size and range of each data type is crucial for avoiding common errors:</p>
+<h3 id="21-integer-overflow"><a class="header" href="#21-integer-overflow">2.1 Integer Overflow</a></h3>
+<p>If you try to assign a value outside the range of a type, Rust’s compiler will throw an error.</p>
+<h4 id="example"><a class="header" href="#example">Example</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x: i32 = 2_147_483_648; // This exceeds the i32 range
+}</code></pre></pre>
+<h4 id="compiler-error"><a class="header" href="#compiler-error">Compiler Error</a></h4>
+<pre><code>error: literal out of range for `i32`
+</code></pre>
+<h3 id="22-type-mismatch"><a class="header" href="#22-type-mismatch">2.2 Type Mismatch</a></h3>
+<p>Rust enforces strict type checking. You cannot assign a negative value to an unsigned integer, nor can you mix types without explicit conversion.</p>
+<h4 id="example-1"><a class="header" href="#example-1">Example</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let y: u64 = -100; // Unsigned type cannot hold a negative value
+}</code></pre></pre>
+<h4 id="compiler-error-1"><a class="header" href="#compiler-error-1">Compiler Error</a></h4>
+<pre><code>error: cannot apply unary operator `-` to type `u64`
+</code></pre>
+<h2 id="3-summary"><a class="header" href="#3-summary">3. Summary</a></h2>
+<p>Rust’s primitive data types are essential for understanding how to efficiently manage memory and ensure code correctness. By mastering these types, developers can write more reliable and performant Rust code. This lesson covered:</p>
+<ul>
+<li><strong>Integer Types</strong>: Understanding signed and unsigned integers and their ranges.</li>
+<li><strong>Floating-Point Types</strong>: Handling real numbers with fractional parts.</li>
+<li><strong>Boolean Type</strong>: Using <code>bool</code> for logical operations.</li>
+<li><strong>Character Type</strong>: Representing single Unicode scalar values with <code>char</code>.</li>
+</ul>
+<p>Further lessons will build on these concepts, delving into compound data types and more advanced Rust programming techniques.</p>
 
                     </main>
 

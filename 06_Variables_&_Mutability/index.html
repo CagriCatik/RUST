@@ -174,7 +174,97 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="variables--mutability"><a class="header" href="#variables--mutability">Variables &amp; Mutability</a></h1>
-<p>This folder contains Rust code files for Variables &amp; Mutability.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will delve into the concepts of variables and mutability in Rust. Understanding how variables work and how mutability is handled is fundamental to programming in Rust. Unlike many other languages, Rust variables are <strong>immutable by default</strong>, meaning once a variable is assigned a value, it cannot be changed unless explicitly made mutable. This default immutability is a key feature of Rust’s design, promoting safety and concurrency by preventing accidental modifications to data.</p>
+<h2 id="1-variables-in-rust"><a class="header" href="#1-variables-in-rust">1. Variables in Rust</a></h2>
+<h3 id="11-immutability-by-default"><a class="header" href="#11-immutability-by-default">1.1 Immutability by Default</a></h3>
+<p>In Rust, variables are immutable by default. This means that once a value is assigned to a variable, that value cannot be changed. Immutability helps prevent bugs that arise from unintended changes to data and supports safe concurrency by ensuring that data does not change unexpectedly.</p>
+<h4 id="example-immutable-variable"><a class="header" href="#example-immutable-variable">Example: Immutable Variable</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a: u16 = 5; // Declaring an immutable variable `a` with type u16 and value 5
+    
+    println!("The value of a is: {}", a);
+    
+    // Attempting to change the value of `a` will result in a compile-time error
+    // a = 10; // ERROR: Cannot assign twice to immutable variable
+}</code></pre></pre>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation:</a></h4>
+<ul>
+<li>The variable <code>a</code> is declared as immutable with the <code>let</code> keyword. Its type is <code>u16</code>, which is an unsigned 16-bit integer, and it is initialized with the value <code>5</code>.</li>
+<li>The attempt to reassign <code>a</code> to <code>10</code> will result in a compilation error because <code>a</code> is immutable.</li>
+</ul>
+<h3 id="12-mutability-in-rust"><a class="header" href="#12-mutability-in-rust">1.2 Mutability in Rust</a></h3>
+<p>To allow a variable to be modified after its initial assignment, you must explicitly declare it as mutable using the <code>mut</code> keyword. This signals to Rust that the variable can change, which is useful in scenarios where you need to update the value of a variable as the program executes.</p>
+<h4 id="example-mutable-variable"><a class="header" href="#example-mutable-variable">Example: Mutable Variable</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut a: u16 = 5; // Declaring a mutable variable `a`
+    
+    println!("The initial value of a is: {}", a);
+    
+    a = 10; // Reassigning a new value to `a`
+    
+    println!("The new value of a is: {}", a);
+}</code></pre></pre>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation:</a></h4>
+<ul>
+<li>By adding the <code>mut</code> keyword, the variable <code>a</code> is made mutable, allowing its value to be changed after its initial assignment.</li>
+<li><code>a</code> is first assigned the value <code>5</code>, then reassigned to <code>10</code>. Both assignments are valid, and the program will compile and run without errors.</li>
+</ul>
+<h2 id="2-type-annotations-and-inference"><a class="header" href="#2-type-annotations-and-inference">2. Type Annotations and Inference</a></h2>
+<p>Rust supports type annotations, where you explicitly specify the type of a variable. However, Rust also has strong type inference, which means it can often determine the type of a variable based on the value you assign to it.</p>
+<h3 id="21-type-annotations"><a class="header" href="#21-type-annotations">2.1 Type Annotations</a></h3>
+<p>You can explicitly specify the type of a variable when declaring it. This is useful for clarity or when Rust cannot infer the type.</p>
+<h4 id="example-type-annotations"><a class="header" href="#example-type-annotations">Example: Type Annotations</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a: u16 = 5; // Type annotation specifying that `a` is a u16
+    let b: f64 = 3.14; // Type annotation specifying that `b` is a 64-bit floating point
+}</code></pre></pre>
+<h3 id="22-type-inference"><a class="header" href="#22-type-inference">2.2 Type Inference</a></h3>
+<p>Rust’s type inference system is powerful, allowing you to omit the type in many cases. Rust will automatically infer the type based on the assigned value.</p>
+<h4 id="example-type-inference"><a class="header" href="#example-type-inference">Example: Type Inference</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a = 5; // Rust infers `a` as an i32 by default
+    let b = 3.14; // Rust infers `b` as an f64 by default
+}</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation:</a></h4>
+<ul>
+<li>In the absence of an explicit type, Rust infers that <code>a</code> is an <code>i32</code> (the default integer type) and <code>b</code> is an <code>f64</code> (the default floating-point type).</li>
+</ul>
+<h2 id="3-common-errors-and-fixes"><a class="header" href="#3-common-errors-and-fixes">3. Common Errors and Fixes</a></h2>
+<h3 id="31-immutable-variable-reassignment"><a class="header" href="#31-immutable-variable-reassignment">3.1 Immutable Variable Reassignment</a></h3>
+<p>Attempting to reassign a value to an immutable variable will result in a compilation error. Rust’s error messages are informative and often suggest solutions, such as making the variable mutable.</p>
+<h4 id="example-compilation-error"><a class="header" href="#example-compilation-error">Example: Compilation Error</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a = 5;
+    a = 10; // ERROR: Cannot assign twice to immutable variable `a`
+}</code></pre></pre>
+<h4 id="fix"><a class="header" href="#fix">Fix:</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut a = 5; // Fix by making `a` mutable
+    a = 10;
+}</code></pre></pre>
+<h3 id="32-unused-variables"><a class="header" href="#32-unused-variables">3.2 Unused Variables</a></h3>
+<p>Rust warns you if you declare a variable but do not use it. This is to help you avoid having unused code that could indicate a logical error in your program.</p>
+<h4 id="example-unused-variable-warning"><a class="header" href="#example-unused-variable-warning">Example: Unused Variable Warning</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a = 5; // Warning: unused variable `a`
+}</code></pre></pre>
+<h4 id="fix-1"><a class="header" href="#fix-1">Fix:</a></h4>
+<ul>
+<li>To suppress the warning, you can either use the variable or prefix the variable name with an underscore (<code>_</code>).</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let _a = 5; // No warning since `_a` is intentionally unused
+}</code></pre></pre>
+<h2 id="4-summary"><a class="header" href="#4-summary">4. Summary</a></h2>
+<p>In this lesson, we explored variables and mutability in Rust. Key points include:</p>
+<ul>
+<li><strong>Immutability by Default</strong>: Variables in Rust are immutable unless explicitly marked as mutable with the <code>mut</code> keyword.</li>
+<li><strong>Mutability</strong>: Mutable variables can be reassigned, allowing for changes to their value after initial assignment.</li>
+<li><strong>Type Annotations and Inference</strong>: Rust can infer types based on assigned values, but you can also explicitly specify types for clarity or when necessary.</li>
+<li><strong>Common Errors</strong>: Rust’s compiler provides helpful error messages and suggestions to fix issues related to immutability and unused variables.</li>
+</ul>
+<p>Understanding these concepts is crucial for writing safe, efficient, and idiomatic Rust code. In the next lesson, we will explore constants in Rust, which differ from variables in important ways, particularly regarding mutability and scope.</p>
 
                     </main>
 

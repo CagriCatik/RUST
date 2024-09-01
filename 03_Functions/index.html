@@ -174,111 +174,128 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
-<h2 id="introduction-to-functions-in-rust"><a class="header" href="#introduction-to-functions-in-rust">Introduction to Functions in Rust</a></h2>
-<p>In this lesson, we will delve into the concept of functions in Rust. Until now, you have encountered only one function, the <code>main</code> function. This tutorial will provide a detailed understanding of defining and using functions in Rust, adhering to scientific rigor and addressing potential inaccuracies.</p>
-<h3 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h3>
-<p>The <code>main</code> function is the entry point of every Rust program. When you navigate to your project's folder and execute <code>cargo run</code>, the <code>main</code> function is invoked. For instance, the following simple program will print "Hello, world!" after compilation:</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will explore functions in Rust, a fundamental aspect of the language that allows for code modularity, reusability, and clarity. Functions in Rust are defined using the <code>fn</code> keyword and are essential for organizing logic and operations within your programs. We will cover function syntax, parameter passing, return values, and the distinction between expressions and statements.</p>
+<h2 id="1-introduction-to-functions-in-rust"><a class="header" href="#1-introduction-to-functions-in-rust">1. Introduction to Functions in Rust</a></h2>
+<h3 id="11-the-main-function"><a class="header" href="#11-the-main-function">1.1 The <code>main</code> Function</a></h3>
+<p>Every Rust program starts execution from the <code>main</code> function, which serves as the entry point. This function must be named <code>main</code> and is required in all executable Rust projects. Renaming or omitting this function will result in compilation errors, as Rust will not know where to begin execution.</p>
+<h4 id="example-basic-main-function"><a class="header" href="#example-basic-main-function">Example: Basic <code>main</code> Function</a></h4>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     println!("Hello, world!");
 }</code></pre></pre>
-<p>If you rename the <code>main</code> function to something else, such as <code>hello</code>, Rust will produce errors because it cannot find the <code>main</code> function:</p>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation</a></h4>
 <ul>
-<li><code>function hello is never used</code></li>
-<li><code>E0601: main function not found in crate</code></li>
+<li>The <code>main</code> function in this example prints "Hello, world!" to the console. This function is automatically recognized and executed by the Rust compiler when you run your program.</li>
 </ul>
-<p>The <code>main</code> function must always be present as it serves as the entry point for the program.</p>
-<h3 id="defining-functions"><a class="header" href="#defining-functions">Defining Functions</a></h3>
-<p>In Rust, any function starts with the keyword <code>fn</code>, followed by the function name, parentheses, and curly braces encompassing the function body. For example:</p>
+<h3 id="12-defining-functions"><a class="header" href="#12-defining-functions">1.2 Defining Functions</a></h3>
+<p>Functions in Rust are defined using the <code>fn</code> keyword followed by the function name, parameter list (if any), and the function body enclosed in curly braces. Function names should be written in snake_case, where all letters are lowercase and words are separated by underscores.</p>
+<h4 id="example-defining-a-function"><a class="header" href="#example-defining-a-function">Example: Defining a Function</a></h4>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>fn my_function() {
-    // function body
-}
-<span class="boring">}</span></code></pre></pre>
-<h4 id="naming-conventions"><a class="header" href="#naming-conventions">Naming Conventions</a></h4>
-<p>Rust uses snake_case for function and variable names. This means all letters should be lowercase and words are separated by underscores. For example:</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn hello_world() {
+</span>fn hello_rust() {
     println!("Hello, Rust!");
 }
 <span class="boring">}</span></code></pre></pre>
-<p>Avoid using kebab-case (e.g., <code>hello-world</code>) as it is not permitted in Rust function names.</p>
-<h3 id="function-parameters-and-return-values"><a class="header" href="#function-parameters-and-return-values">Function Parameters and Return Values</a></h3>
-<p>Functions can accept parameters and return values. Parameters are specified within the parentheses following the function name, and the return type is specified after an arrow (<code>-&gt;</code>).</p>
-<h4 id="example-simple-function"><a class="header" href="#example-simple-function">Example: Simple Function</a></h4>
-<p>Here is a simple function that prints a message:</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn hello_world() {
-    println!("Hello, Rust!");
-}
-<span class="boring">}</span></code></pre></pre>
-<p>To use this function, call it from the <code>main</code> function:</p>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation</a></h4>
+<ul>
+<li>The function <code>hello_rust</code> prints "Hello, Rust!" when called. It follows Rust's naming convention of snake_case for function names.</li>
+</ul>
+<h3 id="13-calling-functions"><a class="header" href="#13-calling-functions">1.3 Calling Functions</a></h3>
+<p>Once a function is defined, it can be called from anywhere within the scope where it is visible. Functions can be called before or after their definition, thanks to Rust’s feature of function hoisting, which allows functions to be defined in any order within the same scope.</p>
+<h4 id="example-calling-a-function"><a class="header" href="#example-calling-a-function">Example: Calling a Function</a></h4>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    hello_world();
+    hello_rust();
+}
+
+fn hello_rust() {
+    println!("Hello, Rust!");
 }</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation</a></h4>
+<ul>
+<li>The <code>hello_rust</code> function is called from the <code>main</code> function. Even though <code>hello_rust</code> is defined after the <code>main</code> function, Rust allows it due to hoisting.</li>
+</ul>
+<h2 id="2-function-parameters-and-return-values"><a class="header" href="#2-function-parameters-and-return-values">2. Function Parameters and Return Values</a></h2>
+<h3 id="21-function-parameters"><a class="header" href="#21-function-parameters">2.1 Function Parameters</a></h3>
+<p>Functions in Rust can accept parameters, which are values passed to the function when it is called. Parameters are specified within the parentheses following the function name, along with their data types. Multiple parameters are separated by commas.</p>
 <h4 id="example-function-with-parameters"><a class="header" href="#example-function-with-parameters">Example: Function with Parameters</a></h4>
-<p>Functions can accept parameters of various types. Here’s an example function that takes an integer parameter and prints it:</p>
-<pre><pre class="playground"><code class="language-rust">fn print_height(height: i32) {
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn tell_height(height: i32) {
     println!("My height is {} cm.", height);
 }
-
-fn main() {
-    print_height(182);
-}</code></pre></pre>
-<h3 id="function-hoisting"><a class="header" href="#function-hoisting">Function Hoisting</a></h3>
-<p>In Rust, you can define functions either before or after the <code>main</code> function. This is known as function hoisting. For example:</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
-    greet();
-}
-
-fn greet() {
-    println!("Hello, Rust!");
-}</code></pre></pre>
-<h3 id="expressions-and-statements"><a class="header" href="#expressions-and-statements">Expressions and Statements</a></h3>
-<p>Understanding expressions and statements is crucial in Rust.</p>
+<span class="boring">}</span></code></pre></pre>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation</a></h4>
 <ul>
-<li><strong>Expression:</strong> Anything that returns a value.</li>
-<li><strong>Statement:</strong> Anything that does not return a value.</li>
+<li>The <code>tell_height</code> function takes an <code>i32</code> parameter named <code>height</code> and prints it as part of a formatted string.</li>
 </ul>
-<p>For example, the following are expressions:</p>
+<h3 id="22-function-return-values"><a class="header" href="#22-function-return-values">2.2 Function Return Values</a></h3>
+<p>Functions in Rust can also return values. The return type is specified after an arrow <code>-&gt;</code> following the parameter list. The return value is usually the result of an expression within the function.</p>
+<h4 id="example-function-returning-a-value"><a class="header" href="#example-function-returning-a-value">Example: Function Returning a Value</a></h4>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>5
-true
-3 + 4
-<span class="boring">}</span></code></pre></pre>
-<p>An <code>if</code> condition is also an expression in Rust:</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let result = if condition { value1 } else { value2 };
-<span class="boring">}</span></code></pre></pre>
-<h3 id="returning-values-from-functions"><a class="header" href="#returning-values-from-functions">Returning Values from Functions</a></h3>
-<p>Functions in Rust can return values using expressions. The return type is specified after the arrow (<code>-&gt;</code>):</p>
-<pre><pre class="playground"><code class="language-rust">fn add(a: i32, b: i32) -&gt; i32 {
+</span>fn add(a: i32, b: i32) -&gt; i32 {
     a + b
 }
-
-fn main() {
-    let sum = add(4, 6);
-    println!("Sum: {}", sum);
+<span class="boring">}</span></code></pre></pre>
+<h4 id="explanation-4"><a class="header" href="#explanation-4">Explanation</a></h4>
+<ul>
+<li>The <code>add</code> function takes two <code>i32</code> parameters, <code>a</code> and <code>b</code>, and returns their sum. Notice that the final expression <code>a + b</code> does not end with a semicolon, indicating that it is the return value of the function.</li>
+</ul>
+<h3 id="23-expressions-vs-statements"><a class="header" href="#23-expressions-vs-statements">2.3 Expressions vs. Statements</a></h3>
+<p>In Rust, an <strong>expression</strong> is anything that returns a value, while a <strong>statement</strong> is a command that performs an action but does not return a value. Understanding the difference is crucial for writing correct and idiomatic Rust code.</p>
+<h4 id="example-expression-and-statement"><a class="header" href="#example-expression-and-statement">Example: Expression and Statement</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = {
+        let price = 5;
+        let quantity = 10;
+        price * quantity
+    };
+    println!("Result: {}", x);
 }</code></pre></pre>
-<h3 id="example-calculating-bmi"><a class="header" href="#example-calculating-bmi">Example: Calculating BMI</a></h3>
-<p>Let's create a function that calculates the Body Mass Index (BMI). The formula for BMI is weight in kilograms divided by the square of height in meters.</p>
-<pre><pre class="playground"><code class="language-rust">fn calculate_bmi(weight: f64, height: f64) -&gt; f64 {
-    weight / (height * height)
+<h4 id="explanation-5"><a class="header" href="#explanation-5">Explanation</a></h4>
+<ul>
+<li>The block <code>{ let price = 5; let quantity = 10; price * quantity }</code> is an expression that evaluates to <code>50</code>. The result is assigned to <code>x</code>.</li>
+<li>A statement would be <code>let price = 5;</code>, which does not return a value but performs an action (declaring a variable).</li>
+</ul>
+<h2 id="3-advanced-function-features"><a class="header" href="#3-advanced-function-features">3. Advanced Function Features</a></h2>
+<h3 id="31-function-with-multiple-parameters-and-return-value"><a class="header" href="#31-function-with-multiple-parameters-and-return-value">3.1 Function with Multiple Parameters and Return Value</a></h3>
+<p>Rust functions can take multiple parameters of different types and return a value. This allows for more complex operations within a single function.</p>
+<h4 id="example-function-with-multiple-parameters"><a class="header" href="#example-function-with-multiple-parameters">Example: Function with Multiple Parameters</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn human_id(name: &amp;str, age: u32, height: f32) {
+    println!("My name is {}, I am {} years old, and my height is {} cm.", name, age, height);
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="explanation-6"><a class="header" href="#explanation-6">Explanation</a></h4>
+<ul>
+<li>The <code>human_id</code> function takes three parameters: <code>name</code> (a string slice), <code>age</code> (an unsigned 32-bit integer), and <code>height</code> (a 32-bit floating point number). It prints these values in a formatted string.</li>
+</ul>
+<h3 id="32-returning-values-from-functions"><a class="header" href="#32-returning-values-from-functions">3.2 Returning Values from Functions</a></h3>
+<p>Functions in Rust can perform operations and return the result. For example, you might want to create a function that calculates the Body Mass Index (BMI).</p>
+<h4 id="example-calculating-bmi"><a class="header" href="#example-calculating-bmi">Example: Calculating BMI</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn calculate_bmi(weight_kg: f64, height_m: f64) -&gt; f64 {
+    weight_kg / (height_m * height_m)
 }
 
 fn main() {
-    let weight = 70.0;
-    let height = 1.75;
-    let bmi = calculate_bmi(weight, height);
+    let bmi = calculate_bmi(70.0, 1.75);
     println!("Your BMI is {:.2}", bmi);
 }</code></pre></pre>
-<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
-<p>This tutorial has provided a comprehensive overview of functions in Rust. Functions are fundamental building blocks in Rust, allowing you to organize and reuse code effectively. Understanding the correct syntax, naming conventions, and the difference between expressions and statements is essential for writing efficient Rust programs.</p>
-<p>By mastering these concepts, you will be better equipped to handle more complex programming challenges in Rust. Continue practicing and exploring the language to deepen your understanding.</p>
+<h4 id="explanation-7"><a class="header" href="#explanation-7">Explanation</a></h4>
+<ul>
+<li>The <code>calculate_bmi</code> function takes weight and height as parameters, computes the BMI, and returns the result. The result is printed with two decimal places.</li>
+</ul>
+<h2 id="4-summary"><a class="header" href="#4-summary">4. Summary</a></h2>
+<p>Functions are a critical component in Rust, allowing for modular, reusable code. This lesson covered:</p>
+<ul>
+<li>The basic structure of functions in Rust.</li>
+<li>How to define and call functions.</li>
+<li>The use of parameters and return values.</li>
+<li>The distinction between expressions and statements.</li>
+<li>Advanced features like functions with multiple parameters and return values.</li>
+</ul>
+<p>By mastering these concepts, you can write more organized and efficient Rust programs. Subsequent lessons will explore more advanced topics such as error handling, lifetimes, and ownership in Rust.</p>
 
                     </main>
 

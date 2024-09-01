@@ -174,7 +174,103 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="constants"><a class="header" href="#constants">Constants</a></h1>
-<p>This folder contains Rust code files for Constants.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will explore constants in Rust, which are distinct from variables and play a crucial role in defining fixed values that cannot be changed during the execution of a program. Constants, like immutable variables, are bound to a name and remain unchanged. However, constants have specific characteristics and rules that differentiate them from variables. Understanding these differences is essential for writing clear and efficient Rust code.</p>
+<h2 id="1-introduction-to-constants-in-rust"><a class="header" href="#1-introduction-to-constants-in-rust">1. Introduction to Constants in Rust</a></h2>
+<h3 id="11-what-is-a-constant"><a class="header" href="#11-what-is-a-constant">1.1 What is a Constant?</a></h3>
+<p>A constant in Rust is a value that is bound to a name and is immutable, meaning it cannot be changed after its declaration. Constants are particularly useful for values that should remain consistent throughout the execution of a program, such as mathematical constants or configuration parameters.</p>
+<h3 id="12-differences-between-constants-and-variables"><a class="header" href="#12-differences-between-constants-and-variables">1.2 Differences Between Constants and Variables</a></h3>
+<p>Although both constants and variables can be immutable, there are key differences between them:</p>
+<ul>
+<li><strong>Constants cannot be made mutable</strong>: Unlike variables, you cannot use the <code>mut</code> keyword with constants. They are always immutable by default.</li>
+<li><strong>Type annotation is required</strong>: When declaring a constant, you must specify its type explicitly.</li>
+<li><strong>Constants are evaluated at compile time</strong>: The value of a constant must be a constant expression that the compiler can evaluate.</li>
+<li><strong>Scope</strong>: Constants can be declared in any scope, including global scope, making them accessible throughout your program.</li>
+</ul>
+<h2 id="2-declaring-constants-in-rust"><a class="header" href="#2-declaring-constants-in-rust">2. Declaring Constants in Rust</a></h2>
+<h3 id="21-syntax-for-constants"><a class="header" href="#21-syntax-for-constants">2.1 Syntax for Constants</a></h3>
+<p>Constants in Rust are declared using the <code>const</code> keyword, followed by the name of the constant, the type annotation, and the value. The name of a constant should be written in uppercase with underscores separating words, adhering to Rust's naming conventions.</p>
+<h4 id="example-declaring-a-constant"><a class="header" href="#example-declaring-a-constant">Example: Declaring a Constant</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    const Y: i32 = 10; // Declaring a constant `Y` with type i32 and value 10
+    
+    println!("The value of Y is: {}", Y);
+}</code></pre></pre>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation</a></h4>
+<ul>
+<li><code>const Y: i32 = 10;</code> declares a constant <code>Y</code> of type <code>i32</code> with a value of <code>10</code>.</li>
+<li>The constant <code>Y</code> is used in the <code>println!</code> macro to display its value.</li>
+</ul>
+<h3 id="22-constants-cannot-be-mutable"><a class="header" href="#22-constants-cannot-be-mutable">2.2 Constants Cannot Be Mutable</a></h3>
+<p>One of the primary rules for constants is that they cannot be declared as mutable. Any attempt to use the <code>mut</code> keyword with a constant will result in a compilation error.</p>
+<h4 id="example-attempting-to-make-a-constant-mutable"><a class="header" href="#example-attempting-to-make-a-constant-mutable">Example: Attempting to Make a Constant Mutable</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    const mut X: i32 = 5; // ERROR: Cannot use `mut` with a constant
+}</code></pre></pre>
+<h4 id="compilation-error"><a class="header" href="#compilation-error">Compilation Error</a></h4>
+<pre><code>error: consts cannot be mutable
+ --&gt; src/main.rs:2:10
+  |
+2 |     const mut X: i32 = 5;
+  |          ^^^
+</code></pre>
+<h3 id="23-type-annotations-are-mandatory"><a class="header" href="#23-type-annotations-are-mandatory">2.3 Type Annotations Are Mandatory</a></h3>
+<p>Unlike variables, where type inference is often sufficient, constants require explicit type annotations. The type must be specified when declaring a constant.</p>
+<h4 id="example-missing-type-annotation"><a class="header" href="#example-missing-type-annotation">Example: Missing Type Annotation</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    const Z = 3.14; // ERROR: Missing type for `const` item
+}</code></pre></pre>
+<h4 id="fix"><a class="header" href="#fix">Fix</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    const Z: f64 = 3.14; // Correct: Type annotation is provided
+}</code></pre></pre>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation</a></h4>
+<ul>
+<li><code>const Z: f64 = 3.14;</code> correctly declares the constant <code>Z</code> with the <code>f64</code> type.</li>
+</ul>
+<h3 id="24-constants-in-global-scope"><a class="header" href="#24-constants-in-global-scope">2.4 Constants in Global Scope</a></h3>
+<p>Constants can be declared in the global scope, outside of the <code>main</code> function or any other function. This makes the constant accessible throughout the entire program.</p>
+<h4 id="example-global-scope-constant"><a class="header" href="#example-global-scope-constant">Example: Global Scope Constant</a></h4>
+<pre><pre class="playground"><code class="language-rust">const PI: f64 = 3.14;
+
+fn main() {
+    println!("The value of PI is: {}", PI);
+}</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation</a></h4>
+<ul>
+<li><code>PI</code> is a constant declared in the global scope, making it accessible within the <code>main</code> function.</li>
+</ul>
+<h2 id="3-practical-examples"><a class="header" href="#3-practical-examples">3. Practical Examples</a></h2>
+<h3 id="31-example-defining-a-constant-in-global-scope"><a class="header" href="#31-example-defining-a-constant-in-global-scope">3.1 Example: Defining a Constant in Global Scope</a></h3>
+<pre><pre class="playground"><code class="language-rust">const HOURS_IN_SECONDS: u32 = 60 * 60 * 3; // 3 hours in seconds
+
+fn main() {
+    println!("3 hours in seconds is: {}", HOURS_IN_SECONDS);
+}</code></pre></pre>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation</a></h4>
+<ul>
+<li><code>HOURS_IN_SECONDS</code> is a constant that calculates the number of seconds in 3 hours. This constant is defined globally and is accessible anywhere in the program.</li>
+<li>The <code>println!</code> macro is used to display the calculated value.</li>
+</ul>
+<h3 id="32-example-using-constants-inside-functions"><a class="header" href="#32-example-using-constants-inside-functions">3.2 Example: Using Constants Inside Functions</a></h3>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    const MAX_POINTS: u32 = 100_000;
+    
+    println!("The maximum points are: {}", MAX_POINTS);
+}</code></pre></pre>
+<h4 id="explanation-4"><a class="header" href="#explanation-4">Explanation</a></h4>
+<ul>
+<li><code>MAX_POINTS</code> is a constant defined inside the <code>main</code> function. Constants can be declared at any scope level, including within functions, but their immutability and type requirements remain.</li>
+</ul>
+<h2 id="4-summary"><a class="header" href="#4-summary">4. Summary</a></h2>
+<p>In this lesson, we explored the concept of constants in Rust. Key takeaways include:</p>
+<ul>
+<li><strong>Immutability</strong>: Constants are immutable and cannot be changed after they are declared.</li>
+<li><strong>Mandatory Type Annotations</strong>: Unlike variables, constants require explicit type annotations.</li>
+<li><strong>Global Scope</strong>: Constants can be declared globally, making them accessible throughout the entire program.</li>
+<li><strong>No Mutability</strong>: Constants cannot be made mutable; any attempt to do so will result in a compilation error.</li>
+</ul>
+<p>Understanding the rules and best practices for using constants is crucial for writing clear and efficient Rust code. Constants are particularly useful for values that need to remain consistent and unchanged throughout the execution of a program. In the next lesson, we will discuss the concept of shadowing in Rust and how it differs from mutability.</p>
 
                     </main>
 

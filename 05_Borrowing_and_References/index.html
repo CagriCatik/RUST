@@ -174,7 +174,143 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="borrowing--references"><a class="header" href="#borrowing--references">Borrowing &amp; References</a></h1>
-<p>This folder contains Rust code files for Borrowing &amp; References.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will explore borrowing and references in Rust, key concepts that allow for efficient memory management while ensuring safety. Building on the previous lesson about ownership, we'll see how Rust enforces rules that prevent common programming errors such as null pointer dereferencing and data races, which are prevalent in languages like C and C++. Understanding borrowing and references is essential to writing safe and concurrent Rust code.</p>
+<h2 id="1-understanding-borrowing-and-references"><a class="header" href="#1-understanding-borrowing-and-references">1. Understanding Borrowing and References</a></h2>
+<h3 id="11-what-is-borrowing"><a class="header" href="#11-what-is-borrowing">1.1 What is Borrowing?</a></h3>
+<p>Borrowing in Rust allows you to access a value without taking ownership of it. Instead of transferring ownership, you can "borrow" the value temporarily, which enables you to use it in another part of your program without violating Rust's ownership rules.</p>
+<h3 id="12-why-is-safety-important"><a class="header" href="#12-why-is-safety-important">1.2 Why is Safety Important?</a></h3>
+<p>Safety in Rust refers to preventing common programming errors like:</p>
+<ul>
+<li><strong>Null pointer dereferencing</strong>: Accessing memory that hasn’t been properly initialized.</li>
+<li><strong>Dangling pointers</strong>: References to memory that has already been freed.</li>
+<li><strong>Buffer overflows</strong>: Writing data beyond the bounds of allocated memory.</li>
+<li><strong>Data races</strong>: Concurrent access to memory that leads to unpredictable behavior.</li>
+</ul>
+<p>Rust's borrowing system, combined with its strict ownership model, ensures that these issues are avoided at compile time, making Rust programs both safe and efficient.</p>
+<h2 id="2-creating-references-in-rust"><a class="header" href="#2-creating-references-in-rust">2. Creating References in Rust</a></h2>
+<h3 id="21-immutable-references"><a class="header" href="#21-immutable-references">2.1 Immutable References</a></h3>
+<p>An immutable reference allows you to read data without modifying it. When you create an immutable reference, you borrow the value without taking ownership, ensuring that the original data remains unchanged.</p>
+<h4 id="example-immutable-reference"><a class="header" href="#example-immutable-reference">Example: Immutable Reference</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5; // `x` owns the value 5
+    let r = &amp;x; // Immutable reference to `x`
+    
+    println!("Value of x is: {}", x);
+    println!("Value of r is: {}", r);
+}</code></pre></pre>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation:</a></h4>
+<ul>
+<li><code>x</code> owns the value <code>5</code>.</li>
+<li><code>r</code> is an immutable reference to <code>x</code>, meaning it borrows <code>x</code> but does not own it. Both <code>x</code> and <code>r</code> can be used to access the value <code>5</code>, but neither can modify it.</li>
+</ul>
+<h3 id="22-mutable-references"><a class="header" href="#22-mutable-references">2.2 Mutable References</a></h3>
+<p>A mutable reference allows you to both read and modify the data. However, Rust enforces that you can only have one mutable reference to a value at a time, preventing data races and ensuring memory safety.</p>
+<h4 id="example-mutable-reference"><a class="header" href="#example-mutable-reference">Example: Mutable Reference</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut x = 5; // `x` is mutable
+    let r = &amp;mut x; // Mutable reference to `x`
+    
+    *r += 1; // Modify the value via the reference
+    println!("Value of x is: {}", x);
+}</code></pre></pre>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation:</a></h4>
+<ul>
+<li><code>x</code> is declared mutable with <code>mut</code>.</li>
+<li><code>r</code> is a mutable reference to <code>x</code>, allowing modification of <code>x</code> through <code>r</code>.</li>
+<li>The value of <code>x</code> is incremented via the mutable reference <code>r</code>.</li>
+</ul>
+<h2 id="3-rules-for-borrowing"><a class="header" href="#3-rules-for-borrowing">3. Rules for Borrowing</a></h2>
+<p>Rust enforces strict rules around borrowing to ensure safety and prevent undefined behavior.</p>
+<h3 id="31-rule-1-only-one-mutable-reference-or-many-immutable-references"><a class="header" href="#31-rule-1-only-one-mutable-reference-or-many-immutable-references">3.1 Rule 1: Only One Mutable Reference or Many Immutable References</a></h3>
+<p>You can have multiple immutable references to a value, but you cannot have a mutable reference if there are any immutable references. This rule prevents data races by ensuring that data cannot be read and modified simultaneously.</p>
+<h4 id="example-conflict-between-immutable-and-mutable-references"><a class="header" href="#example-conflict-between-immutable-and-mutable-references">Example: Conflict Between Immutable and Mutable References</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut x = 5;
+    let r1 = &amp;x; // Immutable reference
+    let r2 = &amp;x; // Another immutable reference
+    
+    // let r3 = &amp;mut x; // ERROR: Cannot borrow `x` as mutable because it is already borrowed as immutable
+    
+    println!("r1: {}, r2: {}", r1, r2);
+}</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation:</a></h4>
+<ul>
+<li><code>r1</code> and <code>r2</code> are immutable references to <code>x</code>. Attempting to create <code>r3</code>, a mutable reference, would result in a compilation error because Rust does not allow both mutable and immutable references to coexist.</li>
+</ul>
+<h3 id="32-rule-2-references-must-always-be-valid"><a class="header" href="#32-rule-2-references-must-always-be-valid">3.2 Rule 2: References Must Always Be Valid</a></h3>
+<p>Rust guarantees that references are always valid by preventing them from outliving the data they reference. When a value goes out of scope, any references to it are invalidated, preventing dangling references.</p>
+<h4 id="example-scope-and-references"><a class="header" href="#example-scope-and-references">Example: Scope and References</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let r;
+    {
+        let x = 5;
+        r = &amp;x;
+    } // `x` goes out of scope here, `r` is now invalid
+    
+    // println!("r: {}", r); // ERROR: `x` does not live long enough
+}</code></pre></pre>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation:</a></h4>
+<ul>
+<li>In this example, <code>x</code> goes out of scope at the end of the inner block. Since <code>r</code> is a reference to <code>x</code>, it becomes invalid when <code>x</code> is dropped, and Rust prevents you from using <code>r</code> outside of <code>x</code>'s scope.</li>
+</ul>
+<h2 id="4-practical-application-bank-account-example"><a class="header" href="#4-practical-application-bank-account-example">4. Practical Application: Bank Account Example</a></h2>
+<p>To demonstrate borrowing and references in a practical scenario, let’s consider a struct representing a bank account. We will implement methods to manage the account balance while ensuring safe access through borrowing rules.</p>
+<h3 id="41-struct-definition"><a class="header" href="#41-struct-definition">4.1 Struct Definition</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct BankAccount {
+    owner: String,
+    balance: f64,
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="42-implementing-methods-with-borrowing"><a class="header" href="#42-implementing-methods-with-borrowing">4.2 Implementing Methods with Borrowing</a></h3>
+<p>We will create two methods: one for withdrawing money, which requires mutable access, and one for checking the balance, which requires immutable access.</p>
+<h4 id="example-borrowing-in-methods"><a class="header" href="#example-borrowing-in-methods">Example: Borrowing in Methods</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl BankAccount {
+    fn withdraw(&amp;mut self, amount: f64) {
+        println!("Withdrawing {} from {}'s account", amount, self.owner);
+        self.balance -= amount;
+    }
+    
+    fn check_balance(&amp;self) {
+        println!("Account owned by {} has a balance of {}.", self.owner, self.balance);
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="explanation-4"><a class="header" href="#explanation-4">Explanation:</a></h4>
+<ul>
+<li><code>withdraw</code> takes a mutable reference to <code>self</code>, allowing it to modify the account balance.</li>
+<li><code>check_balance</code> takes an immutable reference to <code>self</code>, ensuring that the balance is only read, not modified.</li>
+</ul>
+<h3 id="43-usage-in-main"><a class="header" href="#43-usage-in-main">4.3 Usage in <code>main</code></a></h3>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut account = BankAccount {
+        owner: String::from("Alice"),
+        balance: 1050.55,
+    };
+    
+    account.check_balance(); // Immutable borrow
+    account.withdraw(50.0);  // Mutable borrow
+    account.check_balance(); // Immutable borrow again
+}</code></pre></pre>
+<h4 id="explanation-5"><a class="header" href="#explanation-5">Explanation:</a></h4>
+<ul>
+<li>The <code>main</code> function first creates an account and then checks the balance using an immutable borrow.</li>
+<li>The <code>withdraw</code> method is called with a mutable borrow to update the balance.</li>
+<li>Finally, the balance is checked again using another immutable borrow.</li>
+<li>These operations are safe and compile without errors because the borrowing rules are followed correctly.</li>
+</ul>
+<h2 id="5-summary"><a class="header" href="#5-summary">5. Summary</a></h2>
+<p>In this lesson, we covered the fundamental concepts of borrowing and references in Rust. Key points include:</p>
+<ul>
+<li><strong>Immutable References</strong>: Allow you to read data without modifying it.</li>
+<li><strong>Mutable References</strong>: Allow you to modify data, but only one mutable reference can exist at a time.</li>
+<li><strong>Borrowing Rules</strong>: Ensure safety by preventing simultaneous mutable and immutable references, and by ensuring that references are always valid.</li>
+</ul>
+<p>Understanding and applying these concepts is crucial for writing safe and efficient Rust code. Borrowing and references are integral to Rust's ability to provide memory safety guarantees without sacrificing performance. The next lesson will explore more advanced topics related to lifetimes and how Rust ensures that references always remain valid within the appropriate scope.</p>
 
                     </main>
 

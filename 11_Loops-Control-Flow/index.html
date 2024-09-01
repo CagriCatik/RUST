@@ -173,8 +173,155 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h1>
-<p>This folder contains Rust code files for Shadowing.</p>
+                        <h1 id="loops--control-flow"><a class="header" href="#loops--control-flow">Loops / Control Flow</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will explore the concept of loops in Rust, a fundamental aspect of control flow. Loops allow you to execute a block of code multiple times, which is crucial for tasks that require repetition, such as iterating over a collection or retrying an operation until a condition is met. Rust provides three primary loop constructs: <code>loop</code>, <code>while</code>, and <code>for</code>. Each of these loops serves different purposes and offers unique control over the flow of your program.</p>
+<h2 id="1-types-of-loops-in-rust"><a class="header" href="#1-types-of-loops-in-rust">1. Types of Loops in Rust</a></h2>
+<h3 id="11-loop---the-infinite-loop"><a class="header" href="#11-loop---the-infinite-loop">1.1 <code>loop</code> - The Infinite Loop</a></h3>
+<p>The <code>loop</code> keyword in Rust creates an unconditional loop that will run indefinitely unless explicitly stopped using the <code>break</code> statement. This type of loop is useful when you want to repeat a block of code until a specific condition is met from within the loop.</p>
+<h4 id="example-basic-infinite-loop"><a class="header" href="#example-basic-infinite-loop">Example: Basic Infinite Loop</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    loop {
+        println!("Hello, world!");
+    }
+}</code></pre></pre>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation:</a></h4>
+<ul>
+<li>The <code>loop</code> will continuously print "Hello, world!" until manually interrupted (e.g., by pressing <code>Ctrl+C</code> in the terminal).</li>
+</ul>
+<h3 id="12-breaking-a-loop"><a class="header" href="#12-breaking-a-loop">1.2 Breaking a Loop</a></h3>
+<p>To stop an infinite loop, you use the <code>break</code> statement. This is often paired with a conditional check to exit the loop when a certain condition is met.</p>
+<h4 id="example-loop-with-break"><a class="header" href="#example-loop-with-break">Example: Loop with Break</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut counter = 0;
+
+    loop {
+        counter += 1;
+
+        if counter == 10 {
+            break;
+        }
+    }
+
+    println!("Counter reached: {}", counter);
+}</code></pre></pre>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation:</a></h4>
+<ul>
+<li>The loop increments <code>counter</code> by 1 on each iteration.</li>
+<li>When <code>counter</code> reaches 10, the <code>break</code> statement exits the loop, and the final value of <code>counter</code> is printed.</li>
+</ul>
+<h3 id="13-returning-values-from-loops"><a class="header" href="#13-returning-values-from-loops">1.3 Returning Values from Loops</a></h3>
+<p>Rust allows you to return a value from a loop by placing the value after the <code>break</code> statement. This can be useful when you need to perform an operation repeatedly until a desired result is achieved.</p>
+<h4 id="example-returning-a-value-from-a-loop"><a class="header" href="#example-returning-a-value-from-a-loop">Example: Returning a Value from a Loop</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+
+    println!("The result is: {}", result);
+}</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation:</a></h4>
+<ul>
+<li>The loop runs until <code>counter</code> equals 10.</li>
+<li>When the loop breaks, it returns <code>counter * 2</code>, which is 20 in this case, and assigns it to <code>result</code>.</li>
+</ul>
+<h2 id="2-loop-labels"><a class="header" href="#2-loop-labels">2. Loop Labels</a></h2>
+<h3 id="21-nested-loops-and-labels"><a class="header" href="#21-nested-loops-and-labels">2.1 Nested Loops and Labels</a></h3>
+<p>When working with nested loops, it can become unclear which loop a <code>break</code> or <code>continue</code> statement is referring to. Rust provides loop labels to clarify this by explicitly naming loops and specifying which loop should be affected by <code>break</code> or <code>continue</code>.</p>
+<h4 id="example-using-loop-labels"><a class="header" href="#example-using-loop-labels">Example: Using Loop Labels</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut count = 0;
+
+    'outer: loop {
+        println!("Count = {}", count);
+        let mut remaining = 10;
+
+        loop {
+            println!("Remaining = {}", remaining);
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'outer;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+
+    println!("End of loop with count = {}", count);
+}</code></pre></pre>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation:</a></h4>
+<ul>
+<li>The <code>outer</code> loop is labeled with <code>'outer:</code>.</li>
+<li>The inner loop decreases <code>remaining</code> until it equals 9, then breaks out of the inner loop.</li>
+<li>When <code>count</code> equals 2, the program breaks out of the <code>outer</code> loop using the <code>'outer</code> label.</li>
+</ul>
+<h2 id="3-while-loops"><a class="header" href="#3-while-loops">3. <code>while</code> Loops</a></h2>
+<h3 id="31-conditional-loops"><a class="header" href="#31-conditional-loops">3.1 Conditional Loops</a></h3>
+<p>The <code>while</code> loop runs as long as a specified condition is true. This loop is useful for scenarios where the number of iterations is not known beforehand, and the loop needs to continue until a condition changes.</p>
+<h4 id="example-while-loop"><a class="header" href="#example-while-loop">Example: While Loop</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut number = 3;
+
+    while number != 0 {
+        println!("{}!", number);
+
+        number -= 1;
+    }
+
+    println!("Liftoff!");
+}</code></pre></pre>
+<h4 id="explanation-4"><a class="header" href="#explanation-4">Explanation:</a></h4>
+<ul>
+<li>The <code>while</code> loop runs as long as <code>number</code> is not equal to 0.</li>
+<li>Each iteration prints the current value of <code>number</code> and then decrements it by 1.</li>
+<li>When <code>number</code> reaches 0, the loop exits and "Liftoff!" is printed.</li>
+</ul>
+<h2 id="4-for-loops"><a class="header" href="#4-for-loops">4. <code>for</code> Loops</a></h2>
+<h3 id="41-iterating-over-a-collection"><a class="header" href="#41-iterating-over-a-collection">4.1 Iterating Over a Collection</a></h3>
+<p>The <code>for</code> loop in Rust is used to iterate over collections such as arrays or ranges. It automatically handles iteration and avoids the common pitfalls associated with manually managing loop counters.</p>
+<h4 id="example-iterating-over-an-array"><a class="header" href="#example-iterating-over-an-array">Example: Iterating Over an Array</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    for element in a {
+        println!("The value is: {}", element);
+    }
+}</code></pre></pre>
+<h4 id="explanation-5"><a class="header" href="#explanation-5">Explanation:</a></h4>
+<ul>
+<li>The <code>for</code> loop iterates over each element in the array <code>a</code>.</li>
+<li>Each value is printed during its respective iteration.</li>
+</ul>
+<h3 id="42-iterating-over-a-range"><a class="header" href="#42-iterating-over-a-range">4.2 Iterating Over a Range</a></h3>
+<p>Rust’s <code>for</code> loop can also iterate over a range of numbers, which is especially useful for counting up or down.</p>
+<h4 id="example-iterating-over-a-range"><a class="header" href="#example-iterating-over-a-range">Example: Iterating Over a Range</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    for number in 1..4 {
+        println!("The number is: {}", number);
+    }
+}</code></pre></pre>
+<h4 id="explanation-6"><a class="header" href="#explanation-6">Explanation:</a></h4>
+<ul>
+<li>The <code>for</code> loop iterates over the range <code>1..4</code>, printing the numbers 1 through 3.</li>
+<li>Note that the range <code>1..4</code> is exclusive of 4.</li>
+</ul>
+<h2 id="5-summary"><a class="header" href="#5-summary">5. Summary</a></h2>
+<p>In this lesson, we explored the different types of loops in Rust, each serving a unique purpose:</p>
+<ul>
+<li><strong><code>loop</code></strong>: An unconditional loop that continues until explicitly stopped using <code>break</code>.</li>
+<li><strong><code>while</code></strong>: A conditional loop that continues as long as a condition is true.</li>
+<li><strong><code>for</code></strong>: A loop that iterates over collections or ranges, automatically handling iteration logic.</li>
+</ul>
+<p>Understanding how and when to use each type of loop is crucial for controlling the flow of your Rust programs effectively. These loops are powerful tools for iterating over data, performing repetitive tasks, and managing complex control flows in your applications. In the next lesson, we will delve deeper into more advanced Rust features that build on these foundational concepts.</p>
 
                     </main>
 

@@ -174,7 +174,107 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h1>
-<p>This folder contains Rust code files for Shadowing.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will explore the concept of <strong>shadowing</strong> in Rust. Shadowing allows you to declare a new variable with the same name as a previous variable, effectively replacing the old variable within a certain scope. This is different from simply making a variable mutable, as it allows for more flexibility, including the ability to change the variable's type. Understanding shadowing is essential for writing clear and idiomatic Rust code.</p>
+<h2 id="1-what-is-shadowing"><a class="header" href="#1-what-is-shadowing">1. What is Shadowing?</a></h2>
+<h3 id="11-definition"><a class="header" href="#11-definition">1.1 Definition</a></h3>
+<p>Shadowing in Rust refers to the ability to declare a new variable with the same name as a previously declared variable. When a new variable is declared with the same name, it "shadows" the previous one, meaning the previous variable is no longer accessible in that scope, and the new variable takes precedence.</p>
+<h3 id="12-how-shadowing-works"><a class="header" href="#12-how-shadowing-works">1.2 How Shadowing Works</a></h3>
+<p>When you declare a new variable with the same name as an existing one, Rust allows the new variable to shadow the old one. This means that the new variable takes over, and the previous variable is effectively hidden within the scope where the shadowing occurs.</p>
+<h4 id="example-basic-shadowing"><a class="header" href="#example-basic-shadowing">Example: Basic Shadowing</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5; // First declaration of `x`
+    let x = x + 1; // Shadowing the first `x` with a new `x`
+    
+    println!("The value of x is: {}", x); // Prints 6
+}</code></pre></pre>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation:</a></h4>
+<ul>
+<li>The first <code>x</code> is initialized with the value <code>5</code>.</li>
+<li>The second <code>x</code> shadows the first <code>x</code>, adding <code>1</code> to its value, resulting in <code>6</code>.</li>
+<li>When <code>x</code> is printed, it displays the value <code>6</code>, which corresponds to the shadowed <code>x</code>.</li>
+</ul>
+<h2 id="2-shadowing-vs-mutability"><a class="header" href="#2-shadowing-vs-mutability">2. Shadowing vs. Mutability</a></h2>
+<h3 id="21-shadowing-is-not-mutability"><a class="header" href="#21-shadowing-is-not-mutability">2.1 Shadowing is Not Mutability</a></h3>
+<p>It's important to understand that shadowing is different from marking a variable as mutable. While both allow a variable's value to change, shadowing does so by creating a new variable entirely, while mutability allows for in-place modification of an existing variable.</p>
+<h4 id="example-attempt-to-modify-without-mutability"><a class="header" href="#example-attempt-to-modify-without-mutability">Example: Attempt to Modify Without Mutability</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5;
+    // x = 10; // ERROR: Cannot assign twice to immutable variable `x`
+}</code></pre></pre>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation:</a></h4>
+<ul>
+<li>Attempting to reassign <code>x</code> without marking it as mutable results in a compilation error.</li>
+<li>Shadowing avoids this by creating a new variable, which is not the same as modifying the original.</li>
+</ul>
+<h3 id="22-benefits-of-shadowing"><a class="header" href="#22-benefits-of-shadowing">2.2 Benefits of Shadowing</a></h3>
+<p>Shadowing allows you to reuse variable names without needing to mark them as mutable, and it can even allow you to change the type of a variable while reusing its name.</p>
+<h4 id="example-changing-type-with-shadowing"><a class="header" href="#example-changing-type-with-shadowing">Example: Changing Type with Shadowing</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let spaces = "   "; // `spaces` is a string slice
+    let spaces = spaces.len(); // `spaces` is now an integer
+    
+    println!("The number of spaces is: {}", spaces);
+}</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation:</a></h4>
+<ul>
+<li>The first <code>spaces</code> variable is a string slice containing spaces.</li>
+<li>The second <code>spaces</code> variable shadows the first and stores the length of the string, changing its type to an integer.</li>
+<li>This is a powerful use of shadowing, allowing you to reuse the same name while changing the data it holds.</li>
+</ul>
+<h2 id="3-shadowing-in-different-scopes"><a class="header" href="#3-shadowing-in-different-scopes">3. Shadowing in Different Scopes</a></h2>
+<p>Shadowing can occur in different scopes, such as within nested blocks. When a variable is shadowed within a block, the original variable is still accessible outside that block.</p>
+<h4 id="example-shadowing-in-nested-scopes"><a class="header" href="#example-shadowing-in-nested-scopes">Example: Shadowing in Nested Scopes</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5;
+    
+    {
+        let x = x * 2; // Shadows `x` within this block
+        println!("The value of x in the inner scope is: {}", x); // Prints 10
+    }
+    
+    println!("The value of x in the main scope is: {}", x); // Prints 5
+}</code></pre></pre>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation:</a></h4>
+<ul>
+<li>The variable <code>x</code> is declared with the value <code>5</code> in the main scope.</li>
+<li>Inside the nested block, a new <code>x</code> shadows the original <code>x</code>, doubling its value to <code>10</code>.</li>
+<li>Outside the block, the original <code>x</code> remains unaffected and retains its value of <code>5</code>.</li>
+</ul>
+<h2 id="4-shadowing-and-type-changes"><a class="header" href="#4-shadowing-and-type-changes">4. Shadowing and Type Changes</a></h2>
+<p>One of the unique features of shadowing is the ability to change the type of a variable while reusing the same name. This allows for more flexible and concise code, especially when dealing with different stages of data transformation.</p>
+<h4 id="example-shadowing-to-change-type"><a class="header" href="#example-shadowing-to-change-type">Example: Shadowing to Change Type</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let guess = "42"; // `guess` is a string slice
+    
+    let guess: i32 = guess.trim().parse().expect("Not a number!"); // `guess` is now an i32
+    
+    println!("The guess is: {}", guess);
+}</code></pre></pre>
+<h4 id="explanation-4"><a class="header" href="#explanation-4">Explanation:</a></h4>
+<ul>
+<li>The initial <code>guess</code> is a string slice containing the text <code>"42"</code>.</li>
+<li>The second <code>guess</code> shadows the first and parses the string into an integer (<code>i32</code>).</li>
+<li>This allows for seamless type conversion while maintaining the same variable name.</li>
+</ul>
+<h2 id="5-common-pitfalls-and-error-handling"><a class="header" href="#5-common-pitfalls-and-error-handling">5. Common Pitfalls and Error Handling</a></h2>
+<h3 id="51-reassigning-without-shadowing-or-mutability"><a class="header" href="#51-reassigning-without-shadowing-or-mutability">5.1 Reassigning Without Shadowing or Mutability</a></h3>
+<p>If you attempt to reassign a value to a variable without using <code>let</code> for shadowing or <code>mut</code> for mutability, Rust will produce a compile-time error.</p>
+<h4 id="example-error-in-reassignment"><a class="header" href="#example-error-in-reassignment">Example: Error in Reassignment</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5;
+    x = 10; // ERROR: Cannot assign twice to immutable variable `x`
+}</code></pre></pre>
+<h3 id="52-mutability-vs-shadowing"><a class="header" href="#52-mutability-vs-shadowing">5.2 Mutability vs. Shadowing</a></h3>
+<p>Shadowing creates a new variable, while mutability modifies the existing one. Shadowing allows you to declare a new variable with the same name, effectively creating a fresh variable that can even have a different type, whereas mutability does not.</p>
+<h2 id="6-summary"><a class="header" href="#6-summary">6. Summary</a></h2>
+<p>In this lesson, we covered the concept of shadowing in Rust. Key takeaways include:</p>
+<ul>
+<li><strong>Shadowing</strong> allows you to declare a new variable with the same name as an existing one, effectively replacing the old variable in that scope.</li>
+<li><strong>Difference from Mutability</strong>: Unlike mutability, which modifies an existing variable, shadowing creates a new variable that can even have a different type.</li>
+<li><strong>Scope and Flexibility</strong>: Shadowing can be used in different scopes and allows for flexible data transformation by reusing variable names.</li>
+</ul>
+<p>Shadowing is a powerful feature in Rust that, when used appropriately, can make your code more concise and clear. In the next lesson, we will explore more advanced topics that build on the concepts of variables, mutability, and shadowing.</p>
 
                     </main>
 

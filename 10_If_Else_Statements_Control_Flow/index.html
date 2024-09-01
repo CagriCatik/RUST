@@ -173,70 +173,133 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="loops--control-flow"><a class="header" href="#loops--control-flow">Loops / Control Flow</a></h1>
-<p>In this tutorial, we will delve into the essential concept of loops in Rust programming language. Loops are crucial for repeating a block of code multiple times, and Rust offers three types of loops: <code>loop</code>, <code>while</code>, and <code>for</code> loops. We will explore each of these loops, along with practical examples and code snippets.</p>
-<p><strong>1. The <code>loop</code> Keyword:</strong>
-The <code>loop</code> keyword in Rust instructs the program to execute a block of code repeatedly until explicitly told to stop. It's an unconditional loop, meaning it will continue running indefinitely until instructed otherwise.</p>
+                        <h1 id="if-else-statements--control-flow"><a class="header" href="#if-else-statements--control-flow">If Else Statements / Control Flow</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>In this lesson, we will explore control flow in Rust, focusing on <code>if-else</code> expressions. Control flow is an essential concept in programming, determining how the program executes different blocks of code based on conditions. In Rust, as in other programming languages, <code>if-else</code> expressions allow you to branch your code depending on whether certain conditions are true or false. Mastering control flow is crucial for building complex and responsive applications.</p>
+<h2 id="1-introduction-to-control-flow"><a class="header" href="#1-introduction-to-control-flow">1. Introduction to Control Flow</a></h2>
+<h3 id="11-what-is-control-flow"><a class="header" href="#11-what-is-control-flow">1.1 What is Control Flow?</a></h3>
+<p>Control flow refers to the order in which individual statements, instructions, or function calls are executed or evaluated in a programming language. In Rust, control flow is primarily managed through:</p>
+<ul>
+<li><strong>Conditions</strong>: Checking if certain criteria are met.</li>
+<li><strong>Repeating actions</strong>: Looping over blocks of code based on conditions.</li>
+</ul>
+<p>In this lesson, we will focus on how conditions are handled in Rust using <code>if-else</code> expressions.</p>
+<h3 id="12-if-else-expressions"><a class="header" href="#12-if-else-expressions">1.2 If-Else Expressions</a></h3>
+<p>An <code>if</code> expression in Rust allows you to execute a block of code based on whether a condition evaluates to true. The <code>else</code> clause provides an alternative block of code to execute if the condition is false.</p>
+<h4 id="example-basic-if-else-expression"><a class="header" href="#example-basic-if-else-expression">Example: Basic If-Else Expression</a></h4>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    loop {
-        println!("Hello, world!");
-        // To stop the loop manually, use Ctrl+C
-    }
-}</code></pre></pre>
-<p><strong>2. Returning Values from a Loop:</strong>
-One common use case of loops is to retry an operation that might fail, such as checking whether a thread has completed its job. We can also pass the result of the operation out of the loop. The <code>break</code> expression is used to halt the loop execution and return a value.</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut counter = 0;
-    let result = loop {
-        counter += 1;
-        if counter == 10 {
-            break counter * 2;
-        }
-    };
-    println!("Result: {}", result); // Output: 20
-}</code></pre></pre>
-<p><strong>3. Loop Labels:</strong>
-When dealing with nested loops, where one loop is inside another, loop labels become useful. By default, <code>break</code> and <code>continue</code> statements apply to the innermost loop. We can use loop labels to specify which loop to break or continue.</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
-    'counting_up: loop {
-        let mut count = 0;
-        println!("Count: {}", count);
-        let mut remaining = 10;
-        'inner: loop {
-            println!("Remaining: {}", remaining);
-            if remaining == 9 {
-                break 'counting_up;
-            }
-            count += 1;
-            remaining -= 1;
-        }
-    }
-}</code></pre></pre>
-<p><strong>4. Conditional Loops with <code>while</code>:</strong>
-The <code>while</code> loop runs the loop as long as a condition holds true. It evaluates the condition in each iteration, and when the condition becomes false, the loop stops. We can implement complex behaviors using a combination of <code>loop</code>, <code>if else</code>, and <code>break</code>.</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut number = 3;
-    while number != 0 {
-        println!("{}", number);
-        number -= 1;
-    }
-    println!("Hey!");
-}</code></pre></pre>
-<p><strong>5. Looping Through Collections with <code>for</code> Loop:</strong>
-The <code>for</code> loop in Rust iterates over each item in a collection. It is commonly used to loop through arrays, vectors, iterators, etc.</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
-    let arr = [1, 2, 3, 4, 5, 6];
-    for element in arr.iter() {
-        println!("{}", element);
-    }
+    let age = 18;
 
-    let strings = ["a", "b", "c", "d", "e", "f"];
-    for letter in strings.iter() {
-        println!("{}", letter);
+    if age &gt;= 18 {
+        println!("You can drive a car.");
+    } else {
+        println!("You are not old enough to drive.");
     }
 }</code></pre></pre>
-<p><strong>Conclusion:</strong>
-In this lesson, we covered the fundamentals of loops in Rust, including the <code>loop</code>, <code>while</code>, and <code>for</code> loops. Loops are powerful constructs for executing code repeatedly, and mastering them is essential for any Rust programmer. Experiment with the provided examples to solidify your understanding, and stay tuned for more lessons. Thank you for learning with us!</p>
+<h4 id="explanation"><a class="header" href="#explanation">Explanation:</a></h4>
+<ul>
+<li>The condition <code>age &gt;= 18</code> is checked.</li>
+<li>If the condition is true, the program prints "You can drive a car."</li>
+<li>If the condition is false, it prints "You are not old enough to drive."</li>
+</ul>
+<h2 id="2-using-if-else-statements"><a class="header" href="#2-using-if-else-statements">2. Using If-Else Statements</a></h2>
+<h3 id="21-simple-if-statement"><a class="header" href="#21-simple-if-statement">2.1 Simple If Statement</a></h3>
+<p>The most basic control flow statement is the <code>if</code> statement. It checks a condition and executes the associated block of code if the condition is true.</p>
+<h4 id="example-simple-if-statement"><a class="header" href="#example-simple-if-statement">Example: Simple If Statement</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let temperature = 30;
+
+    if temperature &gt; 25 {
+        println!("It's a hot day!");
+    }
+}</code></pre></pre>
+<h4 id="explanation-1"><a class="header" href="#explanation-1">Explanation:</a></h4>
+<ul>
+<li>The condition <code>temperature &gt; 25</code> is evaluated.</li>
+<li>Since the temperature is 30, which is greater than 25, the program prints "It's a hot day!"</li>
+</ul>
+<h3 id="22-if-else-statement"><a class="header" href="#22-if-else-statement">2.2 If-Else Statement</a></h3>
+<p>An <code>if-else</code> statement allows you to specify an alternative block of code to execute when the condition is false.</p>
+<h4 id="example-if-else-statement"><a class="header" href="#example-if-else-statement">Example: If-Else Statement</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let age = 16;
+
+    if age &gt;= 18 {
+        println!("You can drive a car.");
+    } else {
+        println!("You are not old enough to drive.");
+    }
+}</code></pre></pre>
+<h4 id="explanation-2"><a class="header" href="#explanation-2">Explanation:</a></h4>
+<ul>
+<li>The condition <code>age &gt;= 18</code> is false because the age is 16.</li>
+<li>The <code>else</code> block is executed, printing "You are not old enough to drive."</li>
+</ul>
+<h3 id="23-multiple-conditions-with-else-if"><a class="header" href="#23-multiple-conditions-with-else-if">2.3 Multiple Conditions with Else If</a></h3>
+<p>Sometimes, you need to check multiple conditions. This is where <code>else if</code> comes in handy. It allows you to test additional conditions if the previous ones are false.</p>
+<h4 id="example-else-if-statement"><a class="header" href="#example-else-if-statement">Example: Else If Statement</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let number = 6;
+
+    if number % 4 == 0 {
+        println!("The number is divisible by 4.");
+    } else if number % 3 == 0 {
+        println!("The number is divisible by 3.");
+    } else if number % 2 == 0 {
+        println!("The number is divisible by 2.");
+    } else {
+        println!("The number is not divisible by 4, 3, or 2.");
+    }
+}</code></pre></pre>
+<h4 id="explanation-3"><a class="header" href="#explanation-3">Explanation:</a></h4>
+<ul>
+<li>The program checks if <code>number</code> is divisible by 4, then by 3, and then by 2.</li>
+<li>Since 6 is divisible by 3, the corresponding block of code is executed, and "The number is divisible by 3." is printed.</li>
+</ul>
+<h2 id="3-if-in-a-let-statement"><a class="header" href="#3-if-in-a-let-statement">3. If in a Let Statement</a></h2>
+<p>In Rust, you can use <code>if-else</code> expressions to assign values to variables. This can be particularly useful for making decisions within a single line of code.</p>
+<h4 id="example-if-else-in-a-let-statement"><a class="header" href="#example-if-else-in-a-let-statement">Example: If-Else in a Let Statement</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let condition = true;
+    let number = if condition { 5 } else { 6 };
+
+    println!("The number is: {}", number);
+}</code></pre></pre>
+<h4 id="explanation-4"><a class="header" href="#explanation-4">Explanation:</a></h4>
+<ul>
+<li>The variable <code>number</code> is assigned the value <code>5</code> if <code>condition</code> is true, or <code>6</code> if <code>condition</code> is false.</li>
+<li>Since <code>condition</code> is true, <code>number</code> is set to <code>5</code>, and the program prints "The number is: 5."</li>
+</ul>
+<h3 id="31-ensuring-compatible-types"><a class="header" href="#31-ensuring-compatible-types">3.1 Ensuring Compatible Types</a></h3>
+<p>It is important to ensure that both branches of an <code>if-else</code> expression return values of the same type. If the types are incompatible, Rust will produce a compilation error.</p>
+<h4 id="example-incompatible-types-in-if-else"><a class="header" href="#example-incompatible-types-in-if-else">Example: Incompatible Types in If-Else</a></h4>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let condition = false;
+    let number = if condition { 5 } else { "six" }; // ERROR: Incompatible types
+
+    println!("The number is: {}", number);
+}</code></pre></pre>
+<h4 id="compilation-error"><a class="header" href="#compilation-error">Compilation Error:</a></h4>
+<pre><code>error[E0308]: if and else have incompatible types
+ --&gt; src/main.rs:3:34
+  |
+3 |     let number = if condition { 5 } else { "six" };
+  |                                  ^ expected integer, found `&amp;str`
+</code></pre>
+<h4 id="explanation-5"><a class="header" href="#explanation-5">Explanation:</a></h4>
+<ul>
+<li>The <code>if</code> branch returns an integer, while the <code>else</code> branch returns a string. Rust requires both branches to return values of the same type, so this code results in a compilation error.</li>
+</ul>
+<h2 id="4-summary"><a class="header" href="#4-summary">4. Summary</a></h2>
+<p>In this lesson, we covered the basics of control flow in Rust, focusing on <code>if-else</code> expressions. Key points include:</p>
+<ul>
+<li><strong>If Statements</strong>: Execute a block of code if a condition is true.</li>
+<li><strong>If-Else Statements</strong>: Provide an alternative block of code if the condition is false.</li>
+<li><strong>Else If Statements</strong>: Check additional conditions when the previous conditions are false.</li>
+<li><strong>If in Let Statements</strong>: Assign values based on conditions directly within a <code>let</code> statement.</li>
+<li><strong>Type Compatibility</strong>: Ensure that all branches of an <code>if-else</code> expression return the same type to avoid compilation errors.</li>
+</ul>
+<p>Understanding and effectively using control flow is essential for writing flexible and responsive Rust programs. In the next lesson, we will explore loops, another critical aspect of control flow, which allows for repeating actions based on conditions.</p>
 
                     </main>
 
