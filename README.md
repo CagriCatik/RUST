@@ -21,7 +21,7 @@ Rust is a modern, statically-typed systems programming language that emphasizes 
 13. [x] [Enums](./13_Enums/README.md)
 14. [x] [Error Handling Techniques](./14_Error-Handling/README.md)
 15. [x] [Collection Types](./15_Collection-Types/README.md)
-16. [x] [Projects](./16_Projects/README.md)
+16. [ ] [Projects](./projects/README.md)
 
 ## Getting Started
 
